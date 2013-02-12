@@ -73,6 +73,4 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 == Screenshots ==
 
-1. Snitch Verbindungsliste mit Ziel-URL und Aktionen
-
-2. Snitch Verbindungsliste mit weiteren Informationen
+1. Snitch Verbindungsliste
