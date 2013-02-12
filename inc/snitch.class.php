@@ -1,0 +1,370 @@
+<?php
+
+
+/**
+* Snitch
+*
+* @since 0.0.1
+*/
+
+class Snitch
+{
+
+
+	/**
+	* Pseudo-Konstruktor der Klasse
+	*
+	* @since   0.0.1
+	* @change  0.0.1
+	*/
+
+	public static function instance()
+	{
+		new self();
+	}
+
+
+	/**
+	* Konstruktor der Klasse
+	*
+	* @since   0.0.1
+	* @change  0.0.4
+	*/
+
+	public function __construct()
+	{
+		/* Register CPT */
+		add_action(
+			'init',
+			array(
+				'Snitch_CPT',
+				'instance'
+			),
+			1
+		);
+
+		/* HTTP Request */
+		add_filter(
+			'pre_http_request',
+			array(
+				'Snitch_HTTP',
+				'inspect_request'
+			),
+			10,
+			3
+		);
+
+		/* HTTP API */
+		add_action(
+			'http_api_debug',
+			array(
+				'Snitch_HTTP',
+				'log_response'
+			),
+			10,
+			5
+		);
+
+		/* Admin only */
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		/* Skip secondary hooks */
+		if ( (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) OR (defined('DOING_CRON') && DOING_CRON) OR (defined('DOING_AJAX') && DOING_AJAX) OR (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) ) {
+			return;
+		}
+
+		/* CSS */
+		add_action(
+			'admin_print_scripts',
+			array(
+				__CLASS__,
+				'add_css'
+			)
+		);
+
+		/* Admin notice */
+		add_action(
+			'admin_notices',
+			array(
+				__CLASS__,
+				'updated_notice'
+			)
+		);
+		add_action(
+			'updated_notice',
+			array(
+				__CLASS__,
+				'updated_notice'
+			)
+		);
+
+		/* Meta links */
+		add_filter(
+			'plugin_row_meta',
+			array(
+				__CLASS__,
+				'meta_links'
+			),
+			10,
+			2
+		);
+		add_filter(
+			'plugin_action_links_' .SNITCH_BASE,
+			array(
+				__CLASS__,
+				'action_links'
+			)
+		);
+
+		/* Load lang */
+		load_plugin_textdomain(
+			'snitch',
+			false,
+			dirname(SNITCH_BASE). '/lang'
+		);
+	}
+
+
+	/**
+	* Hinzufügen der Meta-Links
+	*
+	* @since   0.0.1
+	* @change  0.0.1
+	*
+	* @param   array   $data  Array mit Links
+	* @param   string  $file  Pfad des Plugins
+	* @return  array          Array mit erweiterten Links
+	*/
+
+	public static function meta_links($data, $file)
+	{
+		/* Skip the rest */
+		if ( $file !== SNITCH_BASE ) {
+			return $data;
+		}
+
+		return array_merge(
+			$data,
+			array(
+				'<a href="https://flattr.com/donation/give/to/sergej.mueller" target="_blank">Flattr</a>',
+				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>'
+			)
+		);
+	}
+
+
+	/**
+	* Hinzufügen der Action-Links
+	*
+	* @since   0.0.4
+	* @change  0.0.4
+	*
+	* @param   array  $data  Bereits existente Links
+	* @return  array  $data  Erweitertes Array mit Links
+	*/
+
+	public static function action_links($data)
+	{
+		/* Rechte? */
+		if ( ! current_user_can('administrator') ) {
+			return $data;
+		}
+
+		return array_merge(
+			$data,
+			array(
+				sprintf(
+					'<a href="%s">%s</a>',
+					add_query_arg(
+						array(
+							'post_type' => 'snitch'
+						),
+						admin_url('edit.php')
+					),
+					translate('Connections', 'snitch')
+				)
+			)
+		);
+	}
+
+
+	/**
+	* Ausgabe des Administrator-Hinweises
+	*
+	* @since   0.0.1
+	* @change  0.0.1
+	*/
+
+	public static function updated_notice()
+	{
+		/* Skip requests */
+		if ( $GLOBALS['pagenow'] !== 'plugins.php' OR ! (defined('WP_HTTP_BLOCK_EXTERNAL') && WP_HTTP_BLOCK_EXTERNAL) ) {
+			return;
+		}
+
+		/* Print */
+		echo sprintf(
+			'<div class="updated"><p>%s</p></div>',
+			translate('Outgoing connections are blocked in <code>wp-config.php</code>. Check the constant WP_HTTP_BLOCK_EXTERNAL.', 'snitch')
+		);
+	}
+
+
+	/**
+	* Fügt Stylesheets hinzu
+	*
+	* @since   0.0.1
+	* @change  0.0.5
+	*/
+
+	public static function add_css()
+	{
+		/* Register styles */
+		wp_register_style(
+			'snitch_global_css',
+			plugins_url(
+				'css/global.min.css',
+				SNITCH_FILE
+			)
+		);
+
+		/* Add styles */
+		wp_enqueue_style('snitch_global_css');
+	}
+
+
+	/**
+	* Rückgabe der Optionen
+	*
+	* @since   0.0.1
+	* @change  0.0.5
+	*
+	* @param   string  $item  Feldname der Option [optional]
+	* @return  mixed          Alle oder eine bestimmte Option
+	*/
+
+	public static function get_options($item = NULL)
+	{
+		/* Get options */
+		$options = get_site_option('snitch');
+
+		return ( empty($item) ? $options : @$options[$item] );
+	}
+
+
+	/**
+	* Rückgabe der Optionen
+	*
+	* @since   0.0.1
+	* @change  0.0.1
+	*
+	* @param   string  $key    Feldname der Option
+	* @param   mixed   $value  Wert der Option
+	*/
+
+	public static function update_options($key, $value)
+	{
+		update_site_option(
+			'snitch',
+			array_merge(
+				self::get_options(),
+				array(
+					$key => $value
+				)
+			)
+		);
+	}
+
+
+	/**
+	* Fügt hinzu oder entfernt Nutzer-Berechtigungen
+	*
+	* @since   0.0.5
+	* @change  0.0.5
+	*
+	* @param   string  $role    Benutzerkennung
+	* @param   string  $action  Auszuführende Aktion
+	*/
+
+	private static function _handle_caps($role, $action)
+	{
+		/* Get role */
+		$role = get_role($role);
+
+		/* Avaliable caps */
+		$caps = array(
+			'edit_snitchs',
+			'edit_snitch',
+			'edit_private_snitchs',
+			'delete_snitch',
+			'delete_snitchs',
+			'edit_others_snitchs',
+			'read_snitchs',
+			'read_private_snitchs',
+			'delete_published_snitchs',
+			'delete_private_snitchs'
+		);
+
+		/* Loop & set caps */
+		foreach( $caps as $caps ) {
+			call_user_func(
+				array(
+					$role,
+					$action. '_cap'
+				),
+				$caps
+			);
+		}
+	}
+
+
+	/**
+	* Fügt Nutzerberechtigung hinzu
+	*
+	* @since   0.0.4
+	* @change  0.0.5
+	*/
+
+	public static function install()
+	{
+		/* Add default options */
+		add_site_option(
+			'snitch',
+			array(
+				'hosts' => array(),
+				'files' => array()
+			),
+			'',
+			'no'
+		);
+
+		/* Add caps */
+		self::_handle_caps('administrator', 'add');
+	}
+
+
+	/**
+	* Deinstalliert das Plugin
+	*
+	* @since   0.0.4
+	* @change  0.0.5
+	*/
+
+	public static function uninstall()
+	{
+		/* Kill options */
+		delete_site_option('snitch');
+
+		/* Kill CPT */
+		if ( $posts = get_posts( array('post_type' => 'snitch', 'post_status' => 'any', 'numberposts' => -1) ) ) {
+			foreach( $posts as $post ) {
+				wp_delete_post( $post->ID, true );
+			}
+		}
+
+		/* Remove caps */
+		self::_handle_caps('administrator', 'remove');
+	}
+}
