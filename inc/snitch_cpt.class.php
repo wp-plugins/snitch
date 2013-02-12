@@ -263,7 +263,7 @@ class Snitch_CPT
 	* Führt den Dropdown Filter aus
 	*
 	* @since   0.0.3
-	* @change  0.0.3
+	* @change  1.0.1
 	*
 	* @param   array  $query  Array mit Abfragewerten
 	* @return  array  $query  Array mit modifizierten Abfragewerten
@@ -272,7 +272,7 @@ class Snitch_CPT
 	public static function perform_filter($query)
 	{
 		/* Local anesthesia */
-		if ( empty(get_current_screen()->id) OR get_current_screen()->id !== 'edit-snitch' OR empty($_GET['snitch_state_filter']) ) {
+		if ( empty($_GET['snitch_state_filter']) ) {
 			return;
 		}
 

@@ -63,16 +63,19 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 
+== Changelog ==
+
+= 1.0.1 =
+* Fix für C*all to undefined function get_current_screen*
+
+= 1.0.0 =
+* Snitch goes online
+
+
+
+
 == Screenshots ==
 
 1. Snitch Verbindungsliste mit Ziel-URL und Aktionen
 
 2. Snitch Verbindungsliste mit weiteren Informationen
-
-
-
-
-== Changelog ==
-
-= 1.0.0 =
-* Snitch goes online
