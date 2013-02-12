@@ -65,6 +65,9 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 == Changelog ==
 
+= 1.0.2 =
+* Umbenennung der Custom Field Keys zwecks Konfliktvermeidung
+
 = 1.0.1 =
 * Fix für C*all to undefined function get_current_screen*
 

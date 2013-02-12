@@ -277,7 +277,7 @@ class Snitch_CPT
 		}
 
 		/* Set values */
-		$query->query_vars['meta_key'] = 'state';
+		$query->query_vars['meta_key'] = '_snitch_state';
         $query->query_vars['meta_value'] = (int)$_GET['snitch_state_filter'];
 	}
 
@@ -375,8 +375,8 @@ class Snitch_CPT
 		return array_merge(
 			$vars,
 			array(
-            	'meta_key' => $orderby,
-            	'orderby' => ( in_array($orderby, array('code', 'state')) ? 'meta_value_num' : 'meta_value' )
+            	'meta_key' => '_snitch_' .$orderby,
+            	'orderby'  => ( in_array($orderby, array('code', 'state')) ? 'meta_value_num' : 'meta_value' )
         	)
         );
 	}
@@ -427,7 +427,7 @@ class Snitch_CPT
 	* HTML-Ausgabe der URL
 	*
 	* @since   0.0.1
-	* @change  0.0.1
+	* @change  1.0.2
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -435,8 +435,8 @@ class Snitch_CPT
 	private static function _html_url($post_id)
 	{
 		/* Init data */
-		$url = get_post_meta($post_id, 'url', true);
-		$host = get_post_meta($post_id, 'host', true);
+		$url = self::_get_meta($post_id, 'url');
+		$host = self::_get_meta($post_id, 'host');
 
 		/* Already blacklisted? */
 		$blacklisted = in_array( $host, self::$options['hosts'] );
@@ -463,7 +463,7 @@ class Snitch_CPT
 	* HTML-Ausgabe der Herkunftsdatei
 	*
 	* @since   0.0.1
-	* @change  0.0.1
+	* @change  1.0.2
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -471,9 +471,9 @@ class Snitch_CPT
 	private static function _html_file($post_id)
 	{
 		/* Init data */
-		$file = get_post_meta($post_id, 'file', true);
-		$line = get_post_meta($post_id, 'line', true);
-		$meta = get_post_meta($post_id, 'meta', true);
+		$file = self::_get_meta($post_id, 'file');
+		$line = self::_get_meta($post_id, 'line');
+		$meta = self::_get_meta($post_id, 'meta');
 
 		/* Already blacklisted? */
 		$blacklisted = in_array( $file, self::$options['files'] );
@@ -499,7 +499,7 @@ class Snitch_CPT
 	* HTML-Ausgabe des Zustandes
 	*
 	* @since   0.0.1
-	* @change  0.0.3
+	* @change  1.0.2
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -507,7 +507,7 @@ class Snitch_CPT
 	private static function _html_state($post_id)
 	{
 		/* Item state */
-		$state = get_post_meta($post_id, 'state', true);
+		$state = self::_get_meta($post_id, 'state');
 
 		/* State values */
 		$states = array(
@@ -536,14 +536,14 @@ class Snitch_CPT
 	* HTML-Ausgabe des Status-Codes
 	*
 	* @since   0.0.1
-	* @change  0.0.1
+	* @change  1.0.2
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
 
 	private static function _html_code($post_id)
 	{
-		echo get_post_meta($post_id, 'code', true);
+		echo self::_get_meta($post_id, 'code');
 	}
 
 
@@ -620,7 +620,7 @@ class Snitch_CPT
 	* Legt einen Custom Post Type Eintrag an
 	*
 	* @since   0.0.1
-	* @change  0.0.3
+	* @change  1.0.2
 	*
 	* @param   array    $meta     Array mit Post-Metadaten
 	* @return  integer  $post_id  Post-ID
@@ -645,7 +645,7 @@ class Snitch_CPT
 		foreach($meta as $key => $value) {
 			add_post_meta(
 				$post_id,
-				$key,
+				'_snitch_' .$key,
 				$value,
 				true
 			);
@@ -659,7 +659,7 @@ class Snitch_CPT
 	* Ausführung der Link-Aktionen
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.0.2
 	*/
 
 	public static function bulk_action()
@@ -700,7 +700,7 @@ class Snitch_CPT
 
 		/* Loop post meta */
 		foreach ($ids as $post_id) {
-			$items[] = get_post_meta($post_id, $type, true);
+			$items[] = self::_get_meta($post_id, $type);
 		}
 
 		/* Handle types */
@@ -767,6 +767,27 @@ class Snitch_CPT
 	private static function _get_pagenum()
 	{
 		return (empty($GLOBALS['pagenum']) ? _get_list_table('WP_Posts_List_Table')->get_pagenum() : $GLOBALS['pagenum'] );
+	}
+
+
+	/**
+	* Rückgabe eines Custom Fields
+	*
+	* @since   1.0.2
+	* @change  1.0.2
+	*
+	* @param   integer  $post_id  Post-ID
+	* @param   string   $key      Key des Fields
+	* @return  mixed    void      Wert des Fields
+	*/
+
+	private static function _get_meta($post_id, $key)
+	{
+		if ( $value = get_post_meta($post_id, '_snitch_' .$key, true) ) {
+			return $value;
+		}
+
+		return get_post_meta($post_id, $key, true);
 	}
 
 
