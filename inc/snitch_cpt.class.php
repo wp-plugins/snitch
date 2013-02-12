@@ -272,7 +272,7 @@ class Snitch_CPT
 	public static function perform_filter($query)
 	{
 		/* Local anesthesia */
-		if ( get_current_screen()->id !== 'edit-snitch' OR empty($_GET['snitch_state_filter']) ) {
+		if ( empty(get_current_screen()->id) OR get_current_screen()->id !== 'edit-snitch' OR empty($_GET['snitch_state_filter']) ) {
 			return;
 		}
 
