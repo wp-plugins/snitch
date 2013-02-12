@@ -77,7 +77,7 @@ class Snitch
 
 		/* CSS */
 		add_action(
-			'admin_print_scripts',
+			'admin_print_styles',
 			array(
 				__CLASS__,
 				'add_css'
@@ -216,14 +216,14 @@ class Snitch
 	* Fügt Stylesheets hinzu
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.0.1
 	*/
 
 	public static function add_css()
 	{
 		/* Register styles */
 		wp_register_style(
-			'snitch_global_css',
+			'snitch-global',
 			plugins_url(
 				'css/global.min.css',
 				SNITCH_FILE
@@ -231,7 +231,7 @@ class Snitch
 		);
 
 		/* Add styles */
-		wp_enqueue_style('snitch_global_css');
+		wp_enqueue_style('snitch-global');
 	}
 
 

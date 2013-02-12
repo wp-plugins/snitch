@@ -74,7 +74,7 @@ class Snitch_CPT
 
 		/* CSS */
 		add_action(
-			'admin_print_scripts-edit.php',
+			'admin_print_styles-edit.php',
 			array(
 				__CLASS__,
 				'add_css'
@@ -196,7 +196,7 @@ class Snitch_CPT
 	* Fügt Stylesheets hinzu
 	*
 	* @since   0.0.5
-	* @change  0.0.5
+	* @change  1.0.1
 	*/
 
 	public static function add_css()
@@ -208,7 +208,7 @@ class Snitch_CPT
 
 		/* Register styles */
 		wp_register_style(
-			'snitch_cpt_css',
+			'snitch-cpt',
 			plugins_url(
 				'css/cpt.min.css',
 				SNITCH_FILE
@@ -216,7 +216,7 @@ class Snitch_CPT
 		);
 
 		/* Add styles */
-		wp_enqueue_style('snitch_cpt_css');
+		wp_enqueue_style('snitch-cpt');
 	}
 
 
