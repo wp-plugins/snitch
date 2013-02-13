@@ -20,7 +20,7 @@ Netzwerkmonitor für WordPress. Mit Verbindungsübersicht zur Überwachung und S
 
 = Vertrauen ist gut, Kontrolle ist besser =
 
-*Snitch* überwacht und protokolliert den ausgehenden Datenstrom im Blog. Jede Verbindung aus WordPress heraus wird aufgezeichnet und Administratoren in tabellarischer Form zur Verfügung gestellt.
+*Snitch* - vom Englischen übersetzt *Petze*, *Spitzel*, *Plaudertasche* - überwacht und protokolliert den ausgehenden Datenstrom im Blog. Jede Verbindung aus WordPress heraus wird aufgezeichnet und Administratoren in tabellarischer Form zur Verfügung gestellt.
 
 Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können zukünftige Versuche blockiert werden: Wahlweise abhängig von der Ziel-URL (Internet-Adresse, die im Hintergrund aufgerufen wird) oder aber vom ausgeführten Skript (Datei, die die Verbindung angefordert hat). Blockierte Verbindungen hebt das WordPress-Plugin visuell ab. Bereits gesperrte Einträge können wieder freigegeben werden.
 
