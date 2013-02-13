@@ -35,6 +35,7 @@ Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können z
 * Anzeige der Ziel-URL und Ursprungsdatei
 * Optische Hervorhebung geblockter Anfragen
 * Blockieren/Freigabe der Verbindungen nach Domain/Datei
+* Überwachung der Kommunikation im Backend und Frontend
 * Löschung von mehreren Einträgen möglich
 * Kosten- und werbefrei
 
