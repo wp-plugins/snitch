@@ -28,7 +28,7 @@ Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können z
 
 
 = Zusammenfassung =
-*Snitch* führt ein Logbuch mit allen autorisierten und blockierten Konnektivitätsversuchen. Die Übersicht verschafft Transparenz und Kontrolle über ausgehende Verbindungen, die von Plugins, Themes und WordPress ausgelöst wurden. Weitere Details im [Snitch Handbuch](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/).
+*Snitch* führt ein Logbuch mit allen autorisierten und blockierten Konnektivitätsversuchen. Die Übersicht verschafft Transparenz und Kontrolle über ausgehende Verbindungen, die von Plugins, Themes und WordPress ausgelöst wurden. Weitere Details und Antworten auf Häufige Fragen im [Snitch Handbuch](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/).
 
 = Pluspunkte =
 * Übersichtliche Oberfläche
