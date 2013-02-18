@@ -58,10 +58,13 @@ msgid "No items found in trash."
 msgstr "Keine Protokoll-Einträge im Papierkorb."
 
 msgid "No items found. Future connections will be shown at this place."
-msgstr "Keine Einträge. Zukünftige Verbindungen erscheinen an dieser Stelle."
+msgstr "Das Protokoll ist leer. Zukünftige Verbindungen erscheinen an dieser Stelle."
 
 msgid "Blocked"
 msgstr "Blockiert"
+
+msgid "Empty Protocol"
+msgstr "Protokoll leeren"
 
 msgid "Network monitor for WordPress. Connecting overview for monitoring and controlling of outbound blog traffic."
 msgstr "Netzwerkmonitor für WordPress. Mit Verbindungsübersicht zur Überwachung und Steuerung des Datenverkehrs im Blog."

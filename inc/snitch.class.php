@@ -349,20 +349,16 @@ class Snitch
 	* Deinstalliert das Plugin
 	*
 	* @since   0.0.4
-	* @change  0.0.5
+	* @change  1.0.3
 	*/
 
 	public static function uninstall()
 	{
+		/* Unregister CPT */
+		Snitch_CPT::delete_items();
+
 		/* Kill options */
 		delete_site_option('snitch');
-
-		/* Kill CPT */
-		if ( $posts = get_posts( array('post_type' => 'snitch', 'post_status' => 'any', 'numberposts' => -1) ) ) {
-			foreach( $posts as $post ) {
-				wp_delete_post( $post->ID, true );
-			}
-		}
 
 		/* Remove caps */
 		self::_handle_caps('administrator', 'remove');

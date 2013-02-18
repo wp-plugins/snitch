@@ -37,7 +37,7 @@ class Snitch_CPT
 	* Registrierung der Post Types und Aktionen
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.0.3
 	*/
 
 	public function __construct()
@@ -139,10 +139,7 @@ class Snitch_CPT
 		/* Action dropdown */
 		add_filter(
 			'bulk_actions-edit-snitch',
-			array(
-				__CLASS__,
-				'bulk_actions'
-			)
+			'__return_empty_array'
 		);
 
 
@@ -237,7 +234,7 @@ class Snitch_CPT
 	* Definition der Filter-Auswahlbox
 	*
 	* @since   0.0.1
-	* @change  0.0.3
+	* @change  1.0.3
 	*/
 
 	public static function filter_dropdown() {
@@ -249,13 +246,23 @@ class Snitch_CPT
 		/* Current value */
 		$current = ( ! isset($_GET['snitch_state_filter']) ? '' : (int)$_GET['snitch_state_filter']);
 
-		/* Print dropdown */
+		/* Filter dropdown */
 		echo sprintf(
 			'<select name="snitch_state_filter">%s%s%s</select>',
 			'<option value="">' .translate('All states', 'snitch'). '</option>',
 			'<option value="' .SNITCH_AUTHORIZED. '" ' .selected($current, SNITCH_AUTHORIZED, false). '>' .translate('Authorized', 'snitch'). '</option>',
 			'<option value="' .SNITCH_BLOCKED. '" ' .selected($current, SNITCH_BLOCKED, false). '>' .translate('Blocked', 'snitch'). '</option>'
 		);
+
+		/* Empty protocol button */
+		if ( empty($_GET['snitch_state_filter']) ) {
+			submit_button(
+				translate('Empty Protocol', 'snitch'),
+				'apply',
+				'snitch_delete_all',
+				false
+			);
+		}
 	}
 
 
@@ -263,7 +270,7 @@ class Snitch_CPT
 	* Führt den Dropdown Filter aus
 	*
 	* @since   0.0.3
-	* @change  1.0.1
+	* @change  1.0.3
 	*
 	* @param   array  $query  Array mit Abfragewerten
 	* @return  array  $query  Array mit modifizierten Abfragewerten
@@ -271,32 +278,30 @@ class Snitch_CPT
 
 	public static function perform_filter($query)
 	{
-		/* Local anesthesia */
-		if ( empty($_GET['snitch_state_filter']) ) {
-			return;
+		/* Query vars for filter */
+		if ( ! empty($_GET['snitch_state_filter'])  ) {
+			$query->query_vars['meta_key'] = '_snitch_state';
+        	$query->query_vars['meta_value'] = (int)$_GET['snitch_state_filter'];
 		}
 
-		/* Set values */
-		$query->query_vars['meta_key'] = '_snitch_state';
-        $query->query_vars['meta_value'] = (int)$_GET['snitch_state_filter'];
-	}
+		/* Delete all items */
+		if ( ! empty($_GET['snitch_delete_all'])  ) {
+			/* Delete items */
+			self::delete_items();
 
+			/* We're done */
+			wp_safe_redirect(
+				add_query_arg(
+					array(
+						'post_type' => 'snitch'
+					),
+					'edit.php'
+				)
+			);
 
-	/**
-	* Entfernt Einträge aus der Aktion-Auswahlbox
-	*
-	* @since   0.0.1
-	* @change  0.0.1
-	*
-	* @param   array  $actions  Array mit Standard-Aktionen
-	* @return  array  $actions  Array mit modifizierten Aktionen
-	*/
-
-	public static function bulk_actions($actions) {
-		/* Kill me */
-		unset($actions['edit']);
-
-		return $actions;
+			/* Fly */
+			exit();
+		}
 	}
 
 
@@ -304,7 +309,7 @@ class Snitch_CPT
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
-	* @change  0.0.1
+	* @change  1.0.3
 	*
 	* @hook    array  snitch_manage_columns
 	*
@@ -315,7 +320,6 @@ class Snitch_CPT
 		return (array)apply_filters(
 			'snitch_manage_columns',
 			array(
-				'cb'      => '<input type="checkbox" />',
 				'url'     => translate('Destination', 'snitch'),
 				'file'    => translate('File', 'snitch'),
 				'state'   => translate('State', 'snitch'),
@@ -726,7 +730,7 @@ class Snitch_CPT
 		);
 
 		/* Fly */
-		exit;
+		exit();
 	}
 
 
@@ -795,7 +799,7 @@ class Snitch_CPT
 	* Erweitert die sekundäre Links-Leiste
 	*
 	* @since   0.0.4
-	* @change  0.0.5
+	* @change  1.0.3
 	*
 	* @param   array  $views  Array mit verfügbaren Links
 	* @return  array  $views  Array mit modifizierten Links
@@ -803,18 +807,61 @@ class Snitch_CPT
 
 	public static function views_edit($views)
 	{
-		/* Kill the published link */
-		unset($views['publish']);
+		return array(
+			'paypal' => '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
+			'flattr' => '<a href="https://flattr.com/donation/give/to/sergej.mueller" target="_blank">Flattr</a>',
+			'manual' => '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>'
+		);
+	}
 
-		/* Donate links */
-		$views['paypal'] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>';
-		$views['flattr'] = '<a href="https://flattr.com/donation/give/to/sergej.mueller" target="_blank">Flattr</a>';
 
-		/* German manual */
-		if ( get_locale() == 'de_DE' ) {
-			$views['manual'] = '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>';
+	/**
+	* Erweitert die sekundäre Links-Leiste
+	*
+	* @since   1.0.3
+	* @change  1.0.3
+	*
+	* @param   integer  $offset  Versatz für DELETE [optional]
+	*/
+
+	public static function delete_items($offset = 0)
+	{
+		/* Admins only */
+		if ( ! current_user_can('administrator') ) {
+			return;
 		}
 
-		return $views;
+		/* Convert */
+		$offset = (int)$offset;
+
+		/* WTF? */
+		if ( $offset < 0 ) {
+			return;
+		}
+
+		/* Global */
+		global $wpdb;
+
+		/* Select query (with official offset fix) */
+		$subquery = sprintf(
+			"SELECT * FROM ( SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'snitch' ORDER BY `ID` DESC LIMIT %d, 18446744073709551615 ) as t",
+			$offset
+		);
+
+		/* Delete postmeta */
+		$wpdb->query(
+			sprintf(
+				"DELETE FROM `$wpdb->postmeta` WHERE `post_id` IN (%s)",
+				$subquery
+			)
+		);
+
+		/* Delete posts */
+		$wpdb->query(
+			sprintf(
+				"DELETE FROM `$wpdb->posts` WHERE `ID` IN (%s)",
+				$subquery
+			)
+		);
 	}
 }

@@ -12,12 +12,6 @@
 
 /* @group UI */
 
-#wpbody-content .subsubsub .paypal {
-	background: #fff;
-	margin-left: -10px;
-	padding-left: 30px;
-}
-
 .wp-list-table .no-items td {
 	height: 62px;
 	text-align: center;
@@ -35,6 +29,18 @@
 .add-new-h2,
 .view-switch,
 #message {
+	display: none;
+}
+
+.tablenav .actions:first-child,
+.tablenav .actions select:first-child {
+	display: none;
+}
+#snitch_delete_all {
+	float: right;
+	margin: 1px 0 0 16px;
+}
+#post-query-submit:first-child {
 	display: none;
 }
 
