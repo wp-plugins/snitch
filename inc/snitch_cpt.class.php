@@ -283,25 +283,6 @@ class Snitch_CPT
 			$query->query_vars['meta_key'] = '_snitch_state';
         	$query->query_vars['meta_value'] = (int)$_GET['snitch_state_filter'];
 		}
-
-		/* Delete all items */
-		if ( ! empty($_GET['snitch_delete_all'])  ) {
-			/* Delete items */
-			self::delete_items();
-
-			/* We're done */
-			wp_safe_redirect(
-				add_query_arg(
-					array(
-						'post_type' => 'snitch'
-					),
-					'edit.php'
-				)
-			);
-
-			/* Fly */
-			exit();
-		}
 	}
 
 
@@ -663,7 +644,7 @@ class Snitch_CPT
 	* Ausführung der Link-Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.0.2
+	* @change  1.0.3
 	*/
 
 	public static function bulk_action()
@@ -671,6 +652,28 @@ class Snitch_CPT
 		/* Only Snitch */
 		if ( get_current_screen()->id !== 'edit-snitch' ) {
 			return;
+		}
+
+		/* Delete all items */
+		if ( ! empty($_GET['snitch_delete_all']) ) {
+			/* Check nonce */
+			check_admin_referer('bulk-posts');
+
+			/* Delete items */
+			self::delete_items();
+
+			/* We're done */
+			wp_safe_redirect(
+				add_query_arg(
+					array(
+						'post_type' => 'snitch'
+					),
+					'edit.php'
+				)
+			);
+
+			/* Fly */
+			exit();
 		}
 
 		/* Check for action and type */
