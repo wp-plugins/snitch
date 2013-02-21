@@ -33,10 +33,11 @@ Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können z
 = Pluspunkte =
 * Übersichtliche Oberfläche
 * Anzeige der Ziel-URL und Ursprungsdatei
+* Gruppierung, Sortierung und Durchsuchen
 * Optische Hervorhebung geblockter Anfragen
 * Blockieren/Freigabe der Verbindungen nach Domain/Datei
 * Überwachung der Kommunikation im Backend und Frontend
-* Löschung von mehreren Einträgen möglich
+* Löschung aller Einträge per Knopfdruck
 * Kosten- und werbefrei
 
 
@@ -65,6 +66,13 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 == Changelog ==
+
+= 1.0.4 =
+* Neu: Durchsuchen der Ziel-URLs möglich
+
+= 1.0.3 =
+* Neu: Schaltfläche *Protokoll leeren*
+* Entfernt: Verzicht auf den Papierkorb
 
 = 1.0.2 =
 * Umbenennung der Custom Field Keys zwecks Konfliktvermeidung

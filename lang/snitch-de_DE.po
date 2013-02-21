@@ -66,6 +66,9 @@ msgstr "Blockiert"
 msgid "Empty Protocol"
 msgstr "Protokoll leeren"
 
+msgid "Search in destination"
+msgstr "Ziel-URLs durchsuchen"
+
 msgid "Network monitor for WordPress. Connecting overview for monitoring and controlling of outbound blog traffic."
 msgstr "Netzwerkmonitor für WordPress. Mit Verbindungsübersicht zur Überwachung und Steuerung des Datenverkehrs im Blog."
 

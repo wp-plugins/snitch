@@ -37,7 +37,7 @@ class Snitch_CPT
 	* Registrierung der Post Types und Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.0.3
+	* @change  1.0.4
 	*/
 
 	public function __construct()
@@ -52,7 +52,8 @@ class Snitch_CPT
 				'label' => 'Snitch',
 				'labels' => array(
 					'not_found' => translate('No items found. Future connections will be shown at this place.', 'snitch'),
-					'not_found_in_trash' => translate('No items found in trash.', 'snitch')
+					'not_found_in_trash' => translate('No items found in trash.', 'snitch'),
+					'search_items' => translate('Search in destination', 'snitch')
 				),
 				'public' => false,
 				'show_ui' => true,
@@ -119,27 +120,39 @@ class Snitch_CPT
 		);
 
 
-		/* Filter dropdown */
-		add_action(
-			'restrict_manage_posts',
-			array(
-				__CLASS__,
-				'filter_dropdown'
-			)
-		);
-		add_filter(
-			'parse_query',
-			array(
-				__CLASS__,
-				'perform_filter'
-			)
-		);
-
-
 		/* Action dropdown */
 		add_filter(
 			'bulk_actions-edit-snitch',
 			'__return_empty_array'
+		);
+
+
+		/* Actions above table */
+		add_action(
+			'restrict_manage_posts',
+			array(
+				__CLASS__,
+				'actions_above_table'
+			)
+		);
+
+
+		/* Vars for column filter */
+		add_filter(
+			'parse_query',
+			array(
+				__CLASS__,
+				'expand_query_vars'
+			)
+		);
+
+		/* Vars for search and order by */
+		add_filter(
+			'request',
+			array(
+				__CLASS__,
+				'orderby_search_columns'
+			)
 		);
 
 
@@ -167,13 +180,6 @@ class Snitch_CPT
 			10,
 			2
 		);
-		add_filter(
-			'request',
-			array(
-				__CLASS__,
-				'column_orderby'
-			)
-		);
 
 
 		/* View links */
@@ -199,7 +205,7 @@ class Snitch_CPT
 	public static function add_css()
 	{
 		/* Local anesthesia */
-		if ( get_current_screen()->id !== 'edit-snitch' ) {
+		if ( ! self::_current_screen('edit-snitch') ) {
 			return;
 		}
 
@@ -234,28 +240,34 @@ class Snitch_CPT
 	* Definition der Filter-Auswahlbox
 	*
 	* @since   0.0.1
-	* @change  1.0.3
+	* @change  1.0.4
 	*/
 
-	public static function filter_dropdown() {
+	public static function actions_above_table()
+	{
 		/* Local anesthesia */
-		if ( get_current_screen()->id !== 'edit-snitch' OR ( !isset($_GET['snitch_state_filter']) && !_get_list_table('WP_Posts_List_Table')->has_items() ) ) {
+		if ( ! self::_current_screen('edit-snitch') ) {
 			return;
 		}
 
-		/* Current value */
-		$current = ( ! isset($_GET['snitch_state_filter']) ? '' : (int)$_GET['snitch_state_filter']);
+		/* No items? */
+		if ( ! isset($_GET['snitch_state_filter']) && ! _get_list_table('WP_Posts_List_Table')->has_items() ) {
+			return;
+		}
+
+		/* Filter value */
+		$filter = ( ! isset($_GET['snitch_state_filter']) ? '' : (int)$_GET['snitch_state_filter'] );
 
 		/* Filter dropdown */
 		echo sprintf(
 			'<select name="snitch_state_filter">%s%s%s</select>',
 			'<option value="">' .translate('All states', 'snitch'). '</option>',
-			'<option value="' .SNITCH_AUTHORIZED. '" ' .selected($current, SNITCH_AUTHORIZED, false). '>' .translate('Authorized', 'snitch'). '</option>',
-			'<option value="' .SNITCH_BLOCKED. '" ' .selected($current, SNITCH_BLOCKED, false). '>' .translate('Blocked', 'snitch'). '</option>'
+			'<option value="' .SNITCH_AUTHORIZED. '" ' .selected($filter, SNITCH_AUTHORIZED, false). '>' .translate('Authorized', 'snitch'). '</option>',
+			'<option value="' .SNITCH_BLOCKED. '" ' .selected($filter, SNITCH_BLOCKED, false). '>' .translate('Blocked', 'snitch'). '</option>'
 		);
 
 		/* Empty protocol button */
-		if ( empty($_GET['snitch_state_filter']) ) {
+		if ( empty($filter) ) {
 			submit_button(
 				translate('Empty Protocol', 'snitch'),
 				'apply',
@@ -270,19 +282,116 @@ class Snitch_CPT
 	* Führt den Dropdown Filter aus
 	*
 	* @since   0.0.3
-	* @change  1.0.3
+	* @change  1.0.4
 	*
 	* @param   array  $query  Array mit Abfragewerten
 	* @return  array  $query  Array mit modifizierten Abfragewerten
 	*/
 
-	public static function perform_filter($query)
+	public static function expand_query_vars($query)
 	{
-		/* Query vars for filter */
-		if ( ! empty($_GET['snitch_state_filter'])  ) {
+		if ( ! empty($_GET['snitch_state_filter']) ) {
 			$query->query_vars['meta_key'] = '_snitch_state';
         	$query->query_vars['meta_value'] = (int)$_GET['snitch_state_filter'];
 		}
+	}
+
+
+	/**
+	* Führt die Filterung via Dropdown aus
+	*
+	* @since   0.0.3
+	* @change  1.0.4
+	*
+	* @param   array  $vars  Array mit Abfragewerten
+	* @return  array  $vars  Array mit modifizierten Abfragewerten
+	*/
+
+	public static function orderby_search_columns($vars)
+	{
+		/* Only Snitch */
+		if ( ! self::_current_screen('edit-snitch') ) {
+			return $vars;
+		}
+
+		/* CPT search */
+		if ( ! empty($vars['s']) ) {
+			add_filter(
+				'get_meta_sql',
+				array(
+					__CLASS__,
+					'modify_and_or'
+				)
+			);
+
+			/* Search in urls */
+			$meta_query = array(
+				array(
+					'key'     => '_snitch_url',
+					'value'   => $vars['s'],
+					'compare' => 'LIKE'
+				)
+			);
+
+			/* Combined with the filter */
+			if ( ! empty($_GET['snitch_state_filter']) ) {
+				$meta_query[] = array(
+					'key'     => '_snitch_state',
+					'value'   => (int)$_GET['snitch_state_filter'],
+					'compare' => '=',
+					'type'    => 'numeric'
+				);
+			}
+
+			/* Merge attrs */
+			$vars = array_merge(
+				$vars,
+				array(
+					'meta_query' => $meta_query
+				)
+			);
+		}
+
+
+		/* CPT orderby */
+		if ( empty($vars['orderby']) OR ! in_array($vars['orderby'], array('url', 'file', 'state', 'code')) ) {
+			return $vars;
+		}
+
+		/* Set var */
+		$orderby = $vars['orderby'];
+
+		return array_merge(
+			$vars,
+			array(
+            	'meta_key' => '_snitch_' .$orderby,
+            	'orderby'  => ( in_array($orderby, array('code', 'state')) ? 'meta_value_num' : 'meta_value' )
+        	)
+        );
+	}
+
+
+	/**
+	* Ändert AND auf OR bei der MySQL-Abfrage
+	*
+	* @since   1.0.4
+	* @change  1.0.4
+	*
+	* @param   array  $join_where  JOIN- und WHERE-Abfragen
+	* @return  array  $join_where  JOIN- und WHERE-Abfragen
+	*/
+
+	function modify_and_or($join_where)
+	{
+		if ( ! empty($join_where['where']) ) {
+			$join_where['where'] = str_replace(
+				'AND (',
+				'OR (',
+				$join_where['where']
+			);
+		}
+
+		return $join_where;
 	}
 
 
@@ -338,36 +447,6 @@ class Snitch_CPT
 
 
 	/**
-	* Führt die Filterung via Dropdown aus
-	*
-	* @since   0.0.3
-	* @change  0.0.3
-	*
-	* @param   array  $vars  Array mit Abfragewerten
-	* @return  array  $vars  Array mit modifizierten Abfragewerten
-	*/
-
-	public static function column_orderby($vars)
-	{
-		/* Check for orderby var */
-		if ( empty($vars['orderby']) OR !in_array($vars['orderby'], array('url', 'file', 'state', 'code')) ) {
-			return $vars;
-		}
-
-		/* Set var */
-		$orderby = $vars['orderby'];
-
-		return array_merge(
-			$vars,
-			array(
-            	'meta_key' => '_snitch_' .$orderby,
-            	'orderby'  => ( in_array($orderby, array('code', 'state')) ? 'meta_value_num' : 'meta_value' )
-        	)
-        );
-	}
-
-
-	/**
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
@@ -379,7 +458,8 @@ class Snitch_CPT
 	* @param   integer  $post_id  Post-ID
 	*/
 
-	public static function custom_column($column, $post_id) {
+	public static function custom_column($column, $post_id)
+	{
 		/* Column types */
 		$types = (array)apply_filters(
 			'snitch_custom_column',
@@ -649,8 +729,8 @@ class Snitch_CPT
 
 	public static function bulk_action()
 	{
-		/* Only Snitch */
-		if ( get_current_screen()->id !== 'edit-snitch' ) {
+		/* Local anesthesia */
+		if ( ! self::_current_screen('edit-snitch') ) {
 			return;
 		}
 
@@ -866,5 +946,23 @@ class Snitch_CPT
 				$subquery
 			)
 		);
+	}
+
+
+	/**
+	* Prüfung auf den aktuellen Screen
+	*
+	* @since   1.0.4
+	* @change  1.0.4
+	*
+	* @param   integer  $id   Screen-ID
+	* @return  boolean  void  TRUE bei Erfolg
+	*/
+
+	private static function _current_screen($id)
+	{
+		$screen = get_current_screen();
+
+		return ( is_object($screen) && $screen->id === $id );
 	}
 }
