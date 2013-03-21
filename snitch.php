@@ -7,7 +7,7 @@ Domain Path: /lang
 Author: Sergej M&uuml;ller
 Author URI: http://wpcoder.de
 Plugin URI: http://wordpress.org/extend/plugins/snitch/
-Version: 1.0.4
+Version: 1.0.5
 */
 
 
@@ -34,17 +34,21 @@ add_action(
 );
 
 
-/* Install */
+/* Hooks */
 register_activation_hook(
 	__FILE__,
 	array(
 		'Snitch',
-		'install'
+		'activation'
 	)
 );
-
-
-/* Uninstall */
+register_deactivation_hook(
+	__FILE__,
+	array(
+		'Snitch',
+		'deactivation'
+	)
+);
 register_uninstall_hook(
 	__FILE__,
 	array(

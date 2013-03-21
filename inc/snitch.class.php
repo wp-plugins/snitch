@@ -28,7 +28,7 @@ class Snitch
 	* Konstruktor der Klasse
 	*
 	* @since   0.0.1
-	* @change  0.0.4
+	* @change  1.0.5
 	*/
 
 	public function __construct()
@@ -63,6 +63,15 @@ class Snitch
 			),
 			10,
 			5
+		);
+
+		/* Cronjob */
+		add_action(
+			'snitch_cleanup',
+			array(
+				'Snitch_CPT',
+				'cleanup_items'
+			)
 		);
 
 		/* Admin only */
@@ -321,13 +330,13 @@ class Snitch
 
 
 	/**
-	* Fügt Nutzerberechtigung hinzu
+	* Aktionen bei der Aktivierung des Plugins
 	*
 	* @since   0.0.4
-	* @change  0.0.5
+	* @change  1.0.5
 	*/
 
-	public static function install()
+	public static function activation()
 	{
 		/* Add default options */
 		add_site_option(
@@ -342,11 +351,33 @@ class Snitch
 
 		/* Add caps */
 		self::_handle_caps('administrator', 'add');
+
+		/* Init cronjob */
+		if ( ! wp_next_scheduled('snitch_cleanup') ) {
+			wp_schedule_event(
+				time(),
+				'daily',
+				'snitch_cleanup'
+			);
+		}
 	}
 
 
 	/**
-	* Deinstalliert das Plugin
+	* Aktionen bei der Deaktivierung des Plugins
+	*
+	* @since   1.0.5
+	* @change  1.0.5
+	*/
+
+	public static function deactivation()
+	{
+		wp_clear_scheduled_hook('snitch_cleanup');
+	}
+
+
+	/**
+	* Aktionen bei der Deinstallation des Plugins
 	*
 	* @since   0.0.4
 	* @change  1.0.3

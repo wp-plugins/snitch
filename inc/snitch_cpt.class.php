@@ -740,7 +740,7 @@ class Snitch_CPT
 			check_admin_referer('bulk-posts');
 
 			/* Delete items */
-			self::delete_items();
+			self::_delete_items();
 
 			/* We're done */
 			wp_safe_redirect(
@@ -899,21 +899,35 @@ class Snitch_CPT
 
 
 	/**
-	* Erweitert die sekundäre Links-Leiste
+	* Bereinigt die Datenbank durch Löschung älterer Einträge
+	*
+	* @since   1.0.5
+	* @change  1.0.5
+	*
+	* @hook    integer  snitch_cleanup_items
+	*/
+
+	public static function cleanup_items() {
+		self::_delete_items(
+			(int)apply_filters(
+				'snitch_cleanup_items',
+				200
+			)
+		);
+	}
+
+
+	/**
+	* Löscht Einträge in der Datenbank
 	*
 	* @since   1.0.3
-	* @change  1.0.3
+	* @change  1.0.5
 	*
 	* @param   integer  $offset  Versatz für DELETE [optional]
 	*/
 
-	public static function delete_items($offset = 0)
+	private static function _delete_items($offset = 0)
 	{
-		/* Admins only */
-		if ( ! current_user_can('administrator') ) {
-			return;
-		}
-
 		/* Convert */
 		$offset = (int)$offset;
 
