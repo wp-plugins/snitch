@@ -724,7 +724,7 @@ class Snitch_CPT
 	* Ausführung der Link-Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.0.3
+	* @change  1.0.6
 	*/
 
 	public static function bulk_action()
@@ -740,7 +740,7 @@ class Snitch_CPT
 			check_admin_referer('bulk-posts');
 
 			/* Delete items */
-			self::_delete_items();
+			self::delete_items();
 
 			/* We're done */
 			wp_safe_redirect(
@@ -902,13 +902,13 @@ class Snitch_CPT
 	* Bereinigt die Datenbank durch Löschung älterer Einträge
 	*
 	* @since   1.0.5
-	* @change  1.0.5
+	* @change  1.0.6
 	*
 	* @hook    integer  snitch_cleanup_items
 	*/
 
 	public static function cleanup_items() {
-		self::_delete_items(
+		self::delete_items(
 			(int)apply_filters(
 				'snitch_cleanup_items',
 				200
@@ -921,12 +921,12 @@ class Snitch_CPT
 	* Löscht Einträge in der Datenbank
 	*
 	* @since   1.0.3
-	* @change  1.0.5
+	* @change  1.0.6
 	*
 	* @param   integer  $offset  Versatz für DELETE [optional]
 	*/
 
-	private static function _delete_items($offset = 0)
+	public static function delete_items($offset = 0)
 	{
 		/* Convert */
 		$offset = (int)$offset;

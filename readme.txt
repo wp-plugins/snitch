@@ -67,6 +67,9 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 == Changelog ==
 
+= 1.0.6 =
+* Umbenennung & Umstellung der Funktion *delete_items* auf *public*
+
 = 1.0.5 =
 * Aufbewahrung von maximal 200 Snitch-Einträgen.
 
