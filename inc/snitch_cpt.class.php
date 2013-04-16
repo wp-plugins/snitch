@@ -892,7 +892,7 @@ class Snitch_CPT
 	{
 		return array(
 			'paypal' => '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
-			'flattr' => '<a href="https://flattr.com/donation/give/to/sergej.mueller" target="_blank">Flattr</a>',
+			'flattr' => '<a href="https://flattr.com/profile/sergej.mueller" target="_blank">Flattr</a>',
 			'manual' => '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>'
 		);
 	}
