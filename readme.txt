@@ -67,6 +67,10 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 == Changelog ==
 
+= 1.0.7 =
+* Entfernung des überflüssigen "Neu"-Links in der Toolbar
+* Unterbindung direkter Dateiaufrufe
+
 = 1.0.6 =
 * Umbenennung/Umstellung der Funktion *delete_items* auf public
 

@@ -1,6 +1,10 @@
 <?php
 
 
+/* Quit */
+defined('ABSPATH') OR exit;
+
+
 /**
 * Snitch_CPT
 *
@@ -37,7 +41,7 @@ class Snitch_CPT
 	* Registrierung der Post Types und Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.0.4
+	* @change  1.0.7
 	*/
 
 	public function __construct()
@@ -59,6 +63,9 @@ class Snitch_CPT
 				'show_ui' => true,
 				'query_var' => true,
 				'hierarchical' => false,
+				'capabilities' => array(
+					'create_posts' => false
+				),
 				'menu_position' => 50,
 				'capability_type' => 'snitch',
 				'publicly_queryable' => false,
