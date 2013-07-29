@@ -3,7 +3,7 @@ Contributors: sergej.mueller
 Tags: sniffer, snitch, network, monitoring, firewall
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5RDDW9FEHGLG6
 Requires at least: 3.5
-Tested up to: 3.5.1
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -35,6 +35,7 @@ Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können z
 * Anzeige der Ziel-URL und Ursprungsdatei
 * Gruppierung, Sortierung und Durchsuchen
 * Optische Hervorhebung geblockter Anfragen
+* POST-Variablen per Klick anzeigbar
 * Blockieren/Freigabe der Verbindungen nach Domain/Datei
 * Überwachung der Kommunikation im Backend und Frontend
 * Löschung aller Einträge per Knopfdruck
@@ -50,7 +51,7 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 = Unterstützung =
-* Per [Flattr](https://flattr.com/donation/give/to/sergej.mueller)
+* Per [Flattr](https://flattr.com/t/1628977)
 * Per [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5RDDW9FEHGLG6)
 
 
@@ -59,13 +60,19 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 = Autor =
-* [Google+](https://plus.google.com/110569673423509816572 "Google+")
-* [Plugins](http://wpcoder.de "Plugins")
+* [Twitter](https://twitter.com/wpSEO)
+* [Google+](https://plus.google.com/110569673423509816572)
+* [Plugins](http://wpcoder.de)
 
 
 
 
 == Changelog ==
+
+= 1.0.8 =
+Deutsch
+* Ausgabe der POST-Daten per Klick
+* Support für WordPress 3.6
 
 = 1.0.7 =
 * Entfernung des überflüssigen "Neu"-Links in der Toolbar

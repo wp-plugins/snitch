@@ -19,7 +19,7 @@ class Snitch_HTTP
 	* Prüft den ausgehenden Request
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.0.8
 	*
 	* @hook    array    snitch_inspect_request_hosts
 	* @hook    array    snitch_inspect_request_files
@@ -79,13 +79,14 @@ class Snitch_HTTP
 				(array)apply_filters(
 					'snitch_inspect_request_insert_post',
 					array(
-						'url'   => esc_url_raw($url),
-						'code'  => NULL,
-						'host'  => $host,
-						'file'  => $file,
-						'line'  => $line,
-						'meta'  => $meta,
-						'state' => SNITCH_BLOCKED
+						'url'      => esc_url_raw($url),
+						'code'     => NULL,
+						'host'     => $host,
+						'file'     => $file,
+						'line'     => $line,
+						'meta'     => $meta,
+						'state'    => SNITCH_BLOCKED,
+						'postdata' => self::_get_postdata($args)
 					)
 				)
 			);
@@ -99,7 +100,7 @@ class Snitch_HTTP
 	* Protokolliert den Request
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.0.8
 	*
 	* @hook   array   snitch_log_response_insert_post
 	*
@@ -147,13 +148,14 @@ class Snitch_HTTP
 			(array)apply_filters(
 				'snitch_log_response_insert_post',
 				array(
-					'url'   => esc_url_raw($url),
-					'code'  => wp_remote_retrieve_response_code($response),
-					'host'  => $host,
-					'file'  => $file,
-					'line'  => $line,
-					'meta'  => $meta,
-					'state' => SNITCH_AUTHORIZED
+					'url'      => esc_url_raw($url),
+					'code'     => wp_remote_retrieve_response_code($response),
+					'host'     => $host,
+					'file'     => $file,
+					'line'     => $line,
+					'meta'     => $meta,
+					'state'    => SNITCH_AUTHORIZED,
+					'postdata' => self::_get_postdata($args)
 				)
 			)
 		);
@@ -318,5 +320,31 @@ class Snitch_HTTP
 		}
 
 		return false;
+	}
+
+
+	/**
+	* Liest übermittelte POST-Daten ein
+	*
+	* @since   1.0.8
+	* @change  1.0.8
+	*
+	* @param   array   $args  Argumente der Anfrage
+	* @return  string  void   BODY der Anfrage (POST-Daten)
+	*/
+
+	private static function _get_postdata($args)
+	{
+		/* No POST data? */
+		if ( empty($args['method']) OR $args['method'] !== 'POST' ) {
+			return NULL;
+		}
+
+		/* No body data? */
+		if ( empty($args['body']) ) {
+			return NULL;
+		}
+
+		return $args['body'];
 	}
 }

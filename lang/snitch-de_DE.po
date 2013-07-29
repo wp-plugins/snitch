@@ -45,11 +45,17 @@ msgstr "Ziel-URL"
 msgid "Time"
 msgstr "Zeit"
 
+msgid "POST data"
+msgstr "POST-Daten"
+
 msgid "File"
 msgstr "Herkunftsdatei"
 
 msgid "Authorized"
 msgstr "Autorisiert"
+
+msgid "Show"
+msgstr "Anzeigen"
 
 msgid "Connections"
 msgstr "Verbindungen"

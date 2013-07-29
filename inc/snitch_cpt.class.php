@@ -206,7 +206,7 @@ class Snitch_CPT
 	* Fügt Stylesheets hinzu
 	*
 	* @since   0.0.5
-	* @change  1.0.1
+	* @change  1.0.8
 	*/
 
 	public static function add_css()
@@ -215,6 +215,9 @@ class Snitch_CPT
 		if ( ! self::_current_screen('edit-snitch') ) {
 			return;
 		}
+
+		/* Add thickbox */
+		add_thickbox();
 
 		/* Register styles */
 		wp_register_style(
@@ -406,7 +409,7 @@ class Snitch_CPT
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
-	* @change  1.0.3
+	* @change  1.0.8
 	*
 	* @hook    array  snitch_manage_columns
 	*
@@ -417,11 +420,12 @@ class Snitch_CPT
 		return (array)apply_filters(
 			'snitch_manage_columns',
 			array(
-				'url'     => translate('Destination', 'snitch'),
-				'file'    => translate('File', 'snitch'),
-				'state'   => translate('State', 'snitch'),
-				'code'    => translate('Code', 'snitch'),
-				'created' => translate('Time', 'snitch')
+				'url'      => translate('Destination', 'snitch'),
+				'file'     => translate('File', 'snitch'),
+				'state'    => translate('State', 'snitch'),
+				'code'     => translate('Code', 'snitch'),
+				'created'  => translate('Time', 'snitch'),
+				'postdata' => translate('POST data', 'snitch')
 			)
 		);
 	}
@@ -457,7 +461,7 @@ class Snitch_CPT
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
-	* @change  0.0.3
+	* @change  1.0.8
 	*
 	* @hook    array    snitch_custom_column
 	*
@@ -471,11 +475,12 @@ class Snitch_CPT
 		$types = (array)apply_filters(
 			'snitch_custom_column',
 			array(
-				'url'     => array(__CLASS__, '_html_url'),
-				'file'    => array(__CLASS__, '_html_file'),
-				'state'   => array(__CLASS__, '_html_state'),
-				'code'    => array(__CLASS__, '_html_code'),
-				'created' => array(__CLASS__, '_html_created'),
+				'url'      => array(__CLASS__, '_html_url'),
+				'file'     => array(__CLASS__, '_html_file'),
+				'state'    => array(__CLASS__, '_html_state'),
+				'code'     => array(__CLASS__, '_html_code'),
+				'created'  => array(__CLASS__, '_html_created'),
+				'postdata' => array(__CLASS__, '_html_postdata')
 			)
 		);
 
@@ -636,6 +641,55 @@ class Snitch_CPT
 		);
 	}
 
+
+	/**
+	* HTML-Ausgabe der POST-Daten
+	*
+	* @since   1.0.8
+	* @change  1.0.8
+	*
+	* @param   integer  $post_id  Post-ID
+	*/
+
+	private static function _html_postdata($post_id)
+	{
+		/* Item post data */
+		$postdata = self::_get_meta($post_id, 'postdata');
+
+		/* Empty data? */
+		if ( empty($postdata) ) {
+			return;
+		}
+
+		/* Parse POST data */
+		if ( ! is_array($postdata) ) {
+			wp_parse_str($postdata, $postdata);
+		}
+
+		/* Empty array? */
+		if ( empty($postdata) ) {
+			return;
+		}
+
+		/* Thickbox content start */
+		echo sprintf(
+			'<div id="snitch-thickbox-%d" class="snitch-hidden"><pre>',
+			$post_id
+		);
+
+		/* POST data */
+		print_r($postdata);
+
+		/* Thickbox content end */
+		echo '</pre></div>';
+
+		/* Thickbox button */
+		echo sprintf(
+			'<a href="#TB_inline?width=400&height=300&inlineId=snitch-thickbox-%d" class="button thickbox">%s</a>',
+			$post_id,
+			translate('Show', 'snitch')
+		);
+	}
 
 
 	/**
