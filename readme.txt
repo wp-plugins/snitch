@@ -70,7 +70,6 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 == Changelog ==
 
 = 1.0.8 =
-Deutsch
 * Ausgabe der POST-Daten per Klick
 * Support für WordPress 3.6
 
