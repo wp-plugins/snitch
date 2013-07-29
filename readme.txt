@@ -72,6 +72,7 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 = 1.0.8 =
 * Ausgabe der POST-Daten per Klick
 * Support für WordPress 3.6
+* [Mehr Details zum Update auf G+](https://plus.google.com/110569673423509816572/posts/f8VaQaHfQjx)
 
 = 1.0.7 =
 * Entfernung des überflüssigen "Neu"-Links in der Toolbar
