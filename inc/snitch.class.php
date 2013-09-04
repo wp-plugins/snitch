@@ -234,6 +234,11 @@ class Snitch
 
 	public static function add_css()
 	{
+		/* Exit on MP6 */
+		if ( defined('MP6') && MP6 ) {
+			return;
+		}
+
 		/* Register styles */
 		wp_register_style(
 			'snitch-global',
