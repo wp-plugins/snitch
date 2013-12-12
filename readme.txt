@@ -72,6 +72,7 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 = 1.0.9 =
 * Optimierung für WordPress 3.8
 * Einführung der Konstante `SNITCH_IGNORE_INTERNAL_REQUESTS`
+* [Mehr Details zum Update auf Google+](https://plus.google.com/+SergejMüller/posts/KaSGc9uNpk4)
 
 = 1.0.8 =
 * Ausgabe der POST-Daten per Klick
