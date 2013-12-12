@@ -19,7 +19,7 @@ class Snitch_HTTP
 	* Prüft den ausgehenden Request
 	*
 	* @since   0.0.1
-	* @change  1.0.8
+	* @change  1.0.9
 	*
 	* @hook    array    snitch_inspect_request_hosts
 	* @hook    array    snitch_inspect_request_files
@@ -40,6 +40,11 @@ class Snitch_HTTP
 
 		/* Invalid host */
 		if ( ! $host = parse_url($url, PHP_URL_HOST) ) {
+			return false;
+		}
+
+		/* Check for internal requests */
+		if ( defined('SNITCH_IGNORE_INTERNAL_REQUESTS') && SNITCH_IGNORE_INTERNAL_REQUESTS && self::_is_internal($host) ) {
 			return false;
 		}
 
@@ -100,7 +105,7 @@ class Snitch_HTTP
 	* Protokolliert den Request
 	*
 	* @since   0.0.1
-	* @change  1.0.8
+	* @change  1.0.9
 	*
 	* @hook   array   snitch_log_response_insert_post
 	*
@@ -125,6 +130,11 @@ class Snitch_HTTP
 
 		/* Invalid host */
 		if ( ! $host = parse_url($url, PHP_URL_HOST) ) {
+			return false;
+		}
+
+		/* Check for internal requests */
+		if ( defined('SNITCH_IGNORE_INTERNAL_REQUESTS') && SNITCH_IGNORE_INTERNAL_REQUESTS && self::_is_internal($host) ) {
 			return false;
 		}
 
@@ -346,5 +356,26 @@ class Snitch_HTTP
 		}
 
 		return $args['body'];
+	}
+
+
+	/**
+	* Prüft, ob die aufgerufene URL eine Blog-interne ist
+	*
+	* @since   1.0.9
+	* @change  1.0.9
+	*
+	* @param   string   $host  Zu prüfender Host
+	* @return  boolean         TRUE bei interner URL
+	*/
+
+	private static function _is_internal($host) {
+		/* Get the blog host */
+		$blog_host = parse_url(
+			get_bloginfo('url'),
+			PHP_URL_HOST
+		);
+
+		return ( $blog_host === $host );
 	}
 }

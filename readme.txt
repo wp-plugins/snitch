@@ -2,8 +2,8 @@
 Contributors: sergej.mueller
 Tags: sniffer, snitch, network, monitoring, firewall
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5RDDW9FEHGLG6
-Requires at least: 3.5
-Tested up to: 3.7
+Requires at least: 3.8
+Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,7 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 = Systemvoraussetzungen =
-* WordPress ab 3.5
+* WordPress ab 3.8
 
 
 = Unterstützung =
@@ -68,6 +68,10 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 == Changelog ==
+
+= 1.0.9 =
+* Optimierung für WordPress 3.8
+* Einführung der Konstante `SNITCH_IGNORE_INTERNAL_REQUESTS`
 
 = 1.0.8 =
 * Ausgabe der POST-Daten per Klick

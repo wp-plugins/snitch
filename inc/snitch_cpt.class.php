@@ -576,7 +576,7 @@ class Snitch_CPT
 	* HTML-Ausgabe des Zustandes
 	*
 	* @since   0.0.1
-	* @change  1.0.2
+	* @change  1.0.9
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -602,7 +602,7 @@ class Snitch_CPT
 		/* Colorize blocked item */
 		if ( $state == SNITCH_BLOCKED ) {
 			echo sprintf(
-				'<style>#post-%d {background:#f8eae8}</style>',
+				'<style>#post-%1$d {background:rgba(248, 234, 232, 0.8)}#post-%1$d.alternate {background:#f8eae8}</style>',
 				$post_id
 			);
 		}
