@@ -69,6 +69,9 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 == Changelog ==
 
+= 1.0.10 =
+* Change: $pre als Rückgabewert in der Plugin-Funktion `inspect_request`
+
 = 1.0.9 =
 * Optimierung für WordPress 3.8
 * Einführung der Konstante `SNITCH_IGNORE_INTERNAL_REQUESTS`

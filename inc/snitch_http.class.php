@@ -19,7 +19,7 @@ class Snitch_HTTP
 	* Prüft den ausgehenden Request
 	*
 	* @since   0.0.1
-	* @change  1.0.9
+	* @change  1.0.10
 	*
 	* @hook    array    snitch_inspect_request_hosts
 	* @hook    array    snitch_inspect_request_files
@@ -35,17 +35,17 @@ class Snitch_HTTP
 	{
 		/* Empty url */
 		if ( empty($url) ) {
-			return false;
+			return $pre;
 		}
 
 		/* Invalid host */
 		if ( ! $host = parse_url($url, PHP_URL_HOST) ) {
-			return false;
+			return $pre;
 		}
 
 		/* Check for internal requests */
 		if ( defined('SNITCH_IGNORE_INTERNAL_REQUESTS') && SNITCH_IGNORE_INTERNAL_REQUESTS && self::_is_internal($host) ) {
-			return false;
+			return $pre;
 		}
 
 		/* Snitch options */
@@ -68,7 +68,7 @@ class Snitch_HTTP
 
 		/* No reference file found */
 		if ( empty($backtrace['file']) ) {
-			return false;
+			return $pre;
 		}
 
 		/* Show your face, file */
@@ -97,7 +97,7 @@ class Snitch_HTTP
 			);
 		}
 
-		return false;
+		return $pre;
 	}
 
 

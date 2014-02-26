@@ -7,7 +7,7 @@ Domain Path: /lang
 Author: Sergej M&uuml;ller
 Author URI: http://wpcoder.de
 Plugin URI: http://wordpress.org/extend/plugins/snitch/
-Version: 1.0.9
+Version: 1.0.10
 */
 
 
