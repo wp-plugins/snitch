@@ -3,7 +3,7 @@ Contributors: sergej.mueller
 Tags: sniffer, snitch, network, monitoring, firewall
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5RDDW9FEHGLG6
 Requires at least: 3.8
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -68,6 +68,10 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 == Changelog ==
+
+= 1.0.11 =
+* Unterstützung zu WordPress 3.9
+* Sourcecode-Schönheitskorrekturen
 
 = 1.0.10 =
 * Change: $pre als Rückgabewert in der Plugin-Funktion `inspect_request`

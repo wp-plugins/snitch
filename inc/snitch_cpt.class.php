@@ -504,7 +504,7 @@ class Snitch_CPT
 	* HTML-Ausgabe der URL
 	*
 	* @since   0.0.1
-	* @change  1.0.2
+	* @change  1.0.11
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -520,7 +520,7 @@ class Snitch_CPT
 
 		/* Print output */
 		echo sprintf(
-			'<div><p class="label blacklisted_%s"></p>%s<div class="row-actions">%s</div></div>',
+			'<div><p class="label blacklisted_%d"></p>%s<div class="row-actions">%s</div></div>',
 			$blacklisted,
 			str_replace(
 				$host,
@@ -540,7 +540,7 @@ class Snitch_CPT
 	* HTML-Ausgabe der Herkunftsdatei
 	*
 	* @since   0.0.1
-	* @change  1.0.2
+	* @change  1.0.11
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -557,7 +557,7 @@ class Snitch_CPT
 
 		/* Print output */
 		echo sprintf(
-			'<div><p class="label blacklisted_%s"></p>%s: %s<br /><code>/%s:%d</code><div class="row-actions">%s</div></div>',
+			'<div><p class="label blacklisted_%d"></p>%s: %s<br /><code>/%s:%d</code><div class="row-actions">%s</div></div>',
 			$blacklisted,
 			$meta['type'],
 			$meta['name'],
@@ -827,7 +827,7 @@ class Snitch_CPT
 		$type = $_GET['type'];
 
 		/* Validate action and type */
-		if ( !in_array($action, array('block', 'unblock')) OR !in_array($type, array('host', 'file')) ) {
+		if ( ! in_array($action, array('block', 'unblock')) OR ! in_array($type, array('host', 'file')) ) {
 			return;
 		}
 
@@ -835,9 +835,9 @@ class Snitch_CPT
 		check_admin_referer('snitch');
 
 		/* Merge bulk IDs */
-		if ( !empty($_REQUEST['id']) ) {
+		if ( ! empty($_REQUEST['id']) ) {
 			$ids = (array)(int)$_REQUEST['id'];
-		} else if ( !empty($_REQUEST['ids']) ) {
+		} else if ( ! empty($_REQUEST['ids']) ) {
 			$ids = (array)$_REQUEST['ids'];
 		} else {
 			return;

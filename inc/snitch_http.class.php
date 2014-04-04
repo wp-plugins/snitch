@@ -248,7 +248,7 @@ class Snitch_HTTP
 	* Suche nach einem Plugin anhand des Pfades
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.0.11
 	*
 	* @param   string  $path  Pfad einer Datei aus dem Plugin-Ordner
 	* @return  array   void   Array mit Plugin-Daten
@@ -272,7 +272,7 @@ class Snitch_HTTP
 			$path,
 			0,
 			strpos($path, DIRECTORY_SEPARATOR)
-		);
+		) . DIRECTORY_SEPARATOR;
 
 		/* Frontend */
 		if ( ! function_exists('get_plugins')) {
@@ -284,7 +284,7 @@ class Snitch_HTTP
 
 		/* Loop plugins */
 		foreach( $plugins as $path => $plugin ) {
-			if ( strpos($path, $folder. '/') === 0 ) {
+			if ( strpos($path, $folder) === 0 ) {
 				return $plugin;
 			}
 		}
