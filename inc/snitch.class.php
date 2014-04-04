@@ -207,7 +207,7 @@ class Snitch
 	* Ausgabe des Administrator-Hinweises
 	*
 	* @since   0.0.1
-	* @change  0.0.1
+	* @change  1.0.11
 	*/
 
 	public static function updated_notice()
@@ -219,7 +219,7 @@ class Snitch
 
 		/* Print */
 		echo sprintf(
-			'<div class="updated"><p>%s</p></div>',
+			'<div class="error"><p>%s</p></div>',
 			translate('Outgoing connections are blocked in <code>wp-config.php</code>. Check the constant WP_HTTP_BLOCK_EXTERNAL.', 'snitch')
 		);
 	}
@@ -234,11 +234,6 @@ class Snitch
 
 	public static function add_css()
 	{
-		/* Exit on MP6 */
-		if ( defined('MP6') && MP6 ) {
-			return;
-		}
-
 		/* Register styles */
 		wp_register_style(
 			'snitch-global',
