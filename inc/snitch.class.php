@@ -106,7 +106,7 @@ class Snitch
 			)
 		);
 		add_action(
-			'updated_notice',
+			'network_admin_notices',
 			array(
 				__CLASS__,
 				'updated_notice'
