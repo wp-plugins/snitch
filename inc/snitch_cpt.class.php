@@ -835,10 +835,10 @@ class Snitch_CPT
 		check_admin_referer('snitch');
 
 		/* Merge bulk IDs */
-		if ( ! empty($_REQUEST['id']) ) {
-			$ids = (array)(int)$_REQUEST['id'];
-		} else if ( ! empty($_REQUEST['ids']) ) {
-			$ids = (array)$_REQUEST['ids'];
+		if ( ! empty($_GET['id']) ) {
+			$ids = (array)(int)$_GET['id'];
+		// } else if ( ! empty($_REQUEST['ids']) ) {
+		// 	$ids = (array)$_REQUEST['ids'];
 		} else {
 			return;
 		}
