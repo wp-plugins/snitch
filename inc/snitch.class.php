@@ -172,7 +172,7 @@ class Snitch
 	* Hinzufügen der Action-Links
 	*
 	* @since   0.0.4
-	* @change  0.0.4
+	* @change  1.0.12
 	*
 	* @param   array  $data  Bereits existente Links
 	* @return  array  $data  Erweitertes Array mit Links
@@ -181,7 +181,7 @@ class Snitch
 	public static function action_links($data)
 	{
 		/* Rechte? */
-		if ( ! current_user_can('administrator') ) {
+		if ( ! current_user_can('manage_options') ) {
 			return $data;
 		}
 

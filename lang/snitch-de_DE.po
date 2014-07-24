@@ -27,8 +27,8 @@ msgstr "Zugriffe aus dieser Datei blockieren"
 msgid "Unblock this file"
 msgstr "Zugriffe aus dieser Datei erlauben"
 
-msgid "New rule added to the Snitch filter. Matches are labeled in orange."
-msgstr "Neue Regel zum Snitch-Filter hinzugefügt. Übereinstimmungen sind in Orange gekennzeichnet."
+msgid "New rule added to the Snitch filter. Matches are labeled in red."
+msgstr "Neue Regel zum Snitch-Filter hinzugefügt. Übereinstimmungen sind in Rot gekennzeichnet."
 
 msgid "An existing rule removed from the Snitch filter."
 msgstr "Vorhandene Regel aus dem Snitch-Filter entfernt."

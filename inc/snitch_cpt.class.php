@@ -785,7 +785,7 @@ class Snitch_CPT
 	* Ausführung der Link-Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.0.6
+	* @change  1.0.12
 	*/
 
 	public static function bulk_action()
@@ -797,6 +797,11 @@ class Snitch_CPT
 
 		/* Delete all items */
 		if ( ! empty($_GET['snitch_delete_all']) ) {
+			/* Capability check */
+			if ( ! current_user_can('delete_snitchs') ) {
+				return;
+			}
+
 			/* Check nonce */
 			check_admin_referer('bulk-posts');
 
@@ -828,6 +833,11 @@ class Snitch_CPT
 
 		/* Validate action and type */
 		if ( ! in_array($action, array('block', 'unblock')) OR ! in_array($type, array('host', 'file')) ) {
+			return;
+		}
+
+		/* Capability check */
+		if ( ! current_user_can('edit_snitchs') ) {
 			return;
 		}
 
@@ -882,7 +892,7 @@ class Snitch_CPT
 	* Ausgabe des Administrator-Hinweises
 	*
 	* @since   0.0.1
-	* @change  0.0.2
+	* @change  1.0.12
 	*/
 
 	public static function updated_notice()
@@ -896,7 +906,7 @@ class Snitch_CPT
 		echo sprintf(
 			'<div class="updated"><p>%s</p></div>',
 			translate(
-				( $_GET['updated'] > 0 ? 'New rule added to the Snitch filter. Matches are labeled in orange.' : 'An existing rule removed from the Snitch filter.' ),
+				( $_GET['updated'] > 0 ? 'New rule added to the Snitch filter. Matches are labeled in red.' : 'An existing rule removed from the Snitch filter.' ),
 				'snitch'
 			)
 		);
