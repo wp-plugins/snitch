@@ -409,7 +409,7 @@ class Snitch_CPT
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
-	* @change  1.0.8
+	* @change  1.1.0
 	*
 	* @hook    array  snitch_manage_columns
 	*
@@ -424,6 +424,7 @@ class Snitch_CPT
 				'file'     => translate('File', 'snitch'),
 				'state'    => translate('State', 'snitch'),
 				'code'     => translate('Code', 'snitch'),
+				'duration' => translate('Duration', 'snitch'),
 				'created'  => translate('Time', 'snitch'),
 				'postdata' => translate('POST data', 'snitch')
 			)
@@ -461,7 +462,7 @@ class Snitch_CPT
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
-	* @change  1.0.8
+	* @change  1.1.0
 	*
 	* @hook    array    snitch_custom_column
 	*
@@ -479,6 +480,7 @@ class Snitch_CPT
 				'file'     => array(__CLASS__, '_html_file'),
 				'state'    => array(__CLASS__, '_html_state'),
 				'code'     => array(__CLASS__, '_html_code'),
+				'duration' => array(__CLASS__, '_html_duration'),
 				'created'  => array(__CLASS__, '_html_created'),
 				'postdata' => array(__CLASS__, '_html_postdata')
 			)
@@ -621,6 +623,25 @@ class Snitch_CPT
 	private static function _html_code($post_id)
 	{
 		echo self::_get_meta($post_id, 'code');
+	}
+
+
+	/**
+	* HTML-Ausgabe der Dauer
+	*
+	* @since   1.1.0
+	*
+	* @param   integer  $post_id  Post-ID
+	*/
+
+	private static function _html_duration($post_id)
+	{
+		if ( $duration = self::_get_meta($post_id, 'duration') ) {
+			echo sprintf(
+				__( '%s seconds' ),
+				$duration
+			);
+		}
 	}
 
 

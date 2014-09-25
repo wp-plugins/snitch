@@ -69,6 +69,9 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 == Changelog ==
 
+= 1.1.0 =
+* Feature: Ausführungsdauer als Metrik (Danke [Matthias Kilian](https://www.gaertner.de) für die Idee)
+
 = 1.0.12 =
 * Weitgehende Berücksichtigung von Nutzerrollen
 * Textliche Anpassungen

@@ -19,7 +19,7 @@ class Snitch_HTTP
 	* Prüft den ausgehenden Request
 	*
 	* @since   0.0.1
-	* @change  1.0.10
+	* @change  1.1.0
 	*
 	* @hook    array    snitch_inspect_request_hosts
 	* @hook    array    snitch_inspect_request_files
@@ -47,6 +47,9 @@ class Snitch_HTTP
 		if ( defined('SNITCH_IGNORE_INTERNAL_REQUESTS') && SNITCH_IGNORE_INTERNAL_REQUESTS && self::_is_internal($host) ) {
 			return $pre;
 		}
+
+		/* Timer start */
+		timer_start();
 
 		/* Snitch options */
 		$options = Snitch::get_options();
@@ -105,7 +108,7 @@ class Snitch_HTTP
 	* Protokolliert den Request
 	*
 	* @since   0.0.1
-	* @change  1.0.9
+	* @change  1.1.0
 	*
 	* @hook   array   snitch_log_response_insert_post
 	*
@@ -160,6 +163,7 @@ class Snitch_HTTP
 				array(
 					'url'      => esc_url_raw($url),
 					'code'     => wp_remote_retrieve_response_code($response),
+					'duration' => timer_stop(false, 2),
 					'host'     => $host,
 					'file'     => $file,
 					'line'     => $line,

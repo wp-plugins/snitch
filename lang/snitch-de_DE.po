@@ -42,6 +42,12 @@ msgstr "Alle Zustände"
 msgid "Destination"
 msgstr "Ziel-URL"
 
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Code"
+msgstr "Status"
+
 msgid "Time"
 msgstr "Zeit"
 
