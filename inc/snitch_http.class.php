@@ -121,7 +121,7 @@ class Snitch_HTTP
 
 	public static function log_response($response, $type, $class, $args, $url)
 	{
-		/* Log only response */
+		/* Only response type */
 		if ( $type !== 'response' ) {
 			return false;
 		}
@@ -131,7 +131,7 @@ class Snitch_HTTP
 			return false;
 		}
 
-		/* Invalid host */
+		/* Validate host */
 		if ( ! $host = parse_url($url, PHP_URL_HOST) ) {
 			return false;
 		}
@@ -152,17 +152,20 @@ class Snitch_HTTP
 		/* Show your face, file */
 		$meta = self::_face_detect($backtrace['file']);
 
-		/* Init data */
+		/* Extract backtrace data */
 		$file = str_replace(ABSPATH, '', $backtrace['file']);
 		$line = (int)$backtrace['line'];
 
-		/* Insert post */
+		/* Response code */
+		$code = ( is_wp_error($response) ? -1 : wp_remote_retrieve_response_code($response) );
+
+		/* Insert CPT */
 		Snitch_CPT::insert_post(
 			(array)apply_filters(
 				'snitch_log_response_insert_post',
 				array(
 					'url'      => esc_url_raw($url),
-					'code'     => wp_remote_retrieve_response_code($response),
+					'code'     => $code,
 					'duration' => timer_stop(false, 2),
 					'host'     => $host,
 					'file'     => $file,

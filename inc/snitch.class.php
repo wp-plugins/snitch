@@ -144,7 +144,7 @@ class Snitch
 	* Hinzufügen der Meta-Links
 	*
 	* @since   0.0.1
-	* @change  0.0.1
+	* @change  1.1.1
 	*
 	* @param   array   $data  Array mit Links
 	* @param   string  $file  Pfad des Plugins
@@ -162,7 +162,8 @@ class Snitch
 			$data,
 			array(
 				'<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
-				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>'
+				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
+				'<a href="https://www.amazon.de/gp/registry/wishlist/2U5I7F9649LOJ/?layout=grid" target="_blank">Wishlist</a>'
 			)
 		);
 	}

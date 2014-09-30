@@ -6,7 +6,7 @@ Requires at least: 3.8
 Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
 
@@ -68,6 +68,10 @@ Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
 
 
 == Changelog ==
+
+= 1.1.1 =
+* Feature: Status-Code „-1“ bei fehlerhaften Verbindungen
+* *Release-Zeitaufwand (Development & QA): 2,5 Stunden*
 
 = 1.1.0 =
 * Feature: Ausführungsdauer als Metrik (Danke [Matthias Kilian](https://www.gaertner.de) für die Idee)

@@ -974,7 +974,7 @@ class Snitch_CPT
 	* Erweitert die sekundäre Links-Leiste
 	*
 	* @since   0.0.4
-	* @change  1.0.3
+	* @change  1.1.1
 	*
 	* @param   array  $views  Array mit verfügbaren Links
 	* @return  array  $views  Array mit modifizierten Links
@@ -983,9 +983,10 @@ class Snitch_CPT
 	public static function views_edit($views)
 	{
 		return array(
-			'paypal' => '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
-			'flattr' => '<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
-			'manual' => '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>'
+			'paypal'	=> '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
+			'flattr'	=> '<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
+			'wishlist'	=> '<a href="https://www.amazon.de/gp/registry/wishlist/2U5I7F9649LOJ/?layout=grid" target="_blank">Wishlist</a>',
+			'manual'	=> '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>'
 		);
 	}
 
