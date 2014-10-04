@@ -162,7 +162,7 @@ class Snitch
 			$data,
 			array(
 				'<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
-				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
+				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ZAQUT9RLPW8QN" target="_blank">PayPal</a>',
 				'<a href="https://www.amazon.de/gp/registry/wishlist/2U5I7F9649LOJ/?layout=grid" target="_blank">Wishlist</a>'
 			)
 		);

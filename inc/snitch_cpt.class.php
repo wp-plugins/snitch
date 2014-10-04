@@ -983,7 +983,7 @@ class Snitch_CPT
 	public static function views_edit($views)
 	{
 		return array(
-			'paypal'	=> '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RDDW9FEHGLG6" target="_blank">PayPal</a>',
+			'paypal'	=> '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ZAQUT9RLPW8QN" target="_blank">PayPal</a>',
 			'flattr'	=> '<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
 			'wishlist'	=> '<a href="https://www.amazon.de/gp/registry/wishlist/2U5I7F9649LOJ/?layout=grid" target="_blank">Wishlist</a>',
 			'manual'	=> '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>'
