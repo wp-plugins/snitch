@@ -43,7 +43,7 @@ Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können z
 
 
 = Support =
-Freundlich formulierte Fragen rund um das Plugin werden per E-Mail beantwortet.
+Fragen rund um das Plugin werden gern per E-Mail beantwortet. Beachtet auch die [Guidelines](https://plus.google.com/+SergejMüller/posts/Ex2vYGN8G2L).
 
 
 = Systemvoraussetzungen =
