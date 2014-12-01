@@ -144,7 +144,7 @@ class Snitch
 	* Hinzufügen der Meta-Links
 	*
 	* @since   0.0.1
-	* @change  1.1.1
+	* @change  1.1.2
 	*
 	* @param   array   $data  Array mit Links
 	* @param   string  $file  Pfad des Plugins
@@ -162,8 +162,7 @@ class Snitch
 			$data,
 			array(
 				'<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
-				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ZAQUT9RLPW8QN" target="_blank">PayPal</a>',
-				'<a href="https://www.amazon.de/gp/registry/wishlist/2U5I7F9649LOJ/?layout=grid" target="_blank">Wishlist</a>'
+				'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ZAQUT9RLPW8QN" target="_blank">PayPal</a>'
 			)
 		);
 	}
@@ -173,7 +172,7 @@ class Snitch
 	* Hinzufügen der Action-Links
 	*
 	* @since   0.0.4
-	* @change  1.0.12
+	* @change  1.1.2
 	*
 	* @param   array  $data  Bereits existente Links
 	* @return  array  $data  Erweitertes Array mit Links
@@ -197,7 +196,7 @@ class Snitch
 						),
 						admin_url('edit.php')
 					),
-					translate('Connections', 'snitch')
+					esc_html__('Connections', 'snitch')
 				)
 			)
 		);
@@ -208,7 +207,7 @@ class Snitch
 	* Ausgabe des Administrator-Hinweises
 	*
 	* @since   0.0.1
-	* @change  1.0.11
+	* @change  1.1.2
 	*/
 
 	public static function updated_notice()
@@ -221,7 +220,7 @@ class Snitch
 		/* Print */
 		echo sprintf(
 			'<div class="error"><p>%s</p></div>',
-			translate('Outgoing connections are blocked in <code>wp-config.php</code>. Check the constant WP_HTTP_BLOCK_EXTERNAL.', 'snitch')
+			esc_html__('Outgoing connections are blocked in <code>wp-config.php</code>. Check the constant WP_HTTP_BLOCK_EXTERNAL.', 'snitch')
 		);
 	}
 

@@ -41,7 +41,7 @@ class Snitch_CPT
 	* Registrierung der Post Types und Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.0.7
+	* @change  1.1.2
 	*/
 
 	public function __construct()
@@ -55,9 +55,9 @@ class Snitch_CPT
 			array(
 				'label' => 'Snitch',
 				'labels' => array(
-					'not_found' => translate('No items found. Future connections will be shown at this place.', 'snitch'),
-					'not_found_in_trash' => translate('No items found in trash.', 'snitch'),
-					'search_items' => translate('Search in destination', 'snitch')
+					'not_found' => esc_html__('No items found. Future connections will be shown at this place.', 'snitch'),
+					'not_found_in_trash' => esc_html__('No items found in trash.', 'snitch'),
+					'search_items' => esc_html__('Search in destination', 'snitch')
 				),
 				'public' => false,
 				'show_ui' => true,
@@ -250,7 +250,7 @@ class Snitch_CPT
 	* Definition der Filter-Auswahlbox
 	*
 	* @since   0.0.1
-	* @change  1.0.4
+	* @change  1.1.2
 	*/
 
 	public static function actions_above_table()
@@ -271,15 +271,15 @@ class Snitch_CPT
 		/* Filter dropdown */
 		echo sprintf(
 			'<select name="snitch_state_filter">%s%s%s</select>',
-			'<option value="">' .translate('All states', 'snitch'). '</option>',
-			'<option value="' .SNITCH_AUTHORIZED. '" ' .selected($filter, SNITCH_AUTHORIZED, false). '>' .translate('Authorized', 'snitch'). '</option>',
-			'<option value="' .SNITCH_BLOCKED. '" ' .selected($filter, SNITCH_BLOCKED, false). '>' .translate('Blocked', 'snitch'). '</option>'
+			'<option value="">' .esc_html__('All states', 'snitch'). '</option>',
+			'<option value="' .SNITCH_AUTHORIZED. '" ' .selected($filter, SNITCH_AUTHORIZED, false). '>' .esc_html__('Authorized', 'snitch'). '</option>',
+			'<option value="' .SNITCH_BLOCKED. '" ' .selected($filter, SNITCH_BLOCKED, false). '>' .esc_html__('Blocked', 'snitch'). '</option>'
 		);
 
 		/* Empty protocol button */
 		if ( empty($filter) ) {
 			submit_button(
-				translate('Empty Protocol', 'snitch'),
+				esc_html__('Empty Protocol', 'snitch'),
 				'apply',
 				'snitch_delete_all',
 				false
@@ -409,7 +409,7 @@ class Snitch_CPT
 	* Verwaltung der benutzerdefinierten Spalten
 	*
 	* @since   0.0.1
-	* @change  1.1.0
+	* @change  1.1.2
 	*
 	* @hook    array  snitch_manage_columns
 	*
@@ -420,13 +420,13 @@ class Snitch_CPT
 		return (array)apply_filters(
 			'snitch_manage_columns',
 			array(
-				'url'      => translate('Destination', 'snitch'),
-				'file'     => translate('File', 'snitch'),
-				'state'    => translate('State', 'snitch'),
-				'code'     => translate('Code', 'snitch'),
-				'duration' => translate('Duration', 'snitch'),
-				'created'  => translate('Time', 'snitch'),
-				'postdata' => translate('POST data', 'snitch')
+				'url'      => esc_html__('Destination', 'snitch'),
+				'file'     => esc_html__('File', 'snitch'),
+				'state'    => esc_html__('State', 'snitch'),
+				'code'     => esc_html__('Code', 'snitch'),
+				'duration' => esc_html__('Duration', 'snitch'),
+				'created'  => esc_html__('Time', 'snitch'),
+				'postdata' => esc_html__('POST data', 'snitch')
 			)
 		);
 	}
@@ -578,7 +578,7 @@ class Snitch_CPT
 	* HTML-Ausgabe des Zustandes
 	*
 	* @since   0.0.1
-	* @change  1.0.9
+	* @change  1.1.2
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -598,7 +598,7 @@ class Snitch_CPT
 		echo sprintf(
 			'<span class="%s">%s</span>',
 			strtolower($states[$state]),
-			translate($states[$state], 'snitch')
+			esc_html__($states[$state], 'snitch')
 		);
 
 		/* Colorize blocked item */
@@ -667,7 +667,7 @@ class Snitch_CPT
 	* HTML-Ausgabe der POST-Daten
 	*
 	* @since   1.0.8
-	* @change  1.0.8
+	* @change  1.1.2
 	*
 	* @param   integer  $post_id  Post-ID
 	*/
@@ -708,7 +708,7 @@ class Snitch_CPT
 		echo sprintf(
 			'<a href="#TB_inline?width=400&height=300&inlineId=snitch-thickbox-%d" class="button thickbox">%s</a>',
 			$post_id,
-			translate('Show', 'snitch')
+			esc_html__('Show', 'snitch')
 		);
 	}
 
@@ -717,7 +717,7 @@ class Snitch_CPT
 	* Generierung der Action-Links
 	*
 	* @since   0.0.1
-	* @change  0.0.5
+	* @change  1.1.2
 	*
 	* @param   integer  $post_id      Post-ID
 	* @param   string   $type         Typ des Links (host|file)
@@ -751,7 +751,7 @@ class Snitch_CPT
 				)
 			),
 			$action,
-			translate(
+			esc_html__(
 				sprintf(
 					'%s this %s',
 					ucfirst($action),
@@ -913,7 +913,7 @@ class Snitch_CPT
 	* Ausgabe des Administrator-Hinweises
 	*
 	* @since   0.0.1
-	* @change  1.0.12
+	* @change  1.1.2
 	*/
 
 	public static function updated_notice()
@@ -926,7 +926,7 @@ class Snitch_CPT
 		/* Print */
 		echo sprintf(
 			'<div class="updated"><p>%s</p></div>',
-			translate(
+			esc_html__(
 				( $_GET['updated'] > 0 ? 'New rule added to the Snitch filter. Matches are labeled in red.' : 'An existing rule removed from the Snitch filter.' ),
 				'snitch'
 			)
@@ -984,9 +984,7 @@ class Snitch_CPT
 	{
 		return array(
 			'paypal'	=> '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ZAQUT9RLPW8QN" target="_blank">PayPal</a>',
-			'flattr'	=> '<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>',
-			'wishlist'	=> '<a href="https://www.amazon.de/gp/registry/wishlist/2U5I7F9649LOJ/?layout=grid" target="_blank">Wishlist</a>',
-			'manual'	=> '<a href="http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/" target="_blank">Handbuch</a>'
+			'flattr'	=> '<a href="https://flattr.com/t/1628977" target="_blank">Flattr</a>'
 		);
 	}
 

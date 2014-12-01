@@ -10,115 +10,126 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
 
-Network monitor for WordPress. Connecting overview for monitoring and controlling of outbound blog traffic.
+Network monitor for WordPress. Connecting overview for monitoring and controlling of outgoing site traffic.
 
 
 
 == Description ==
 
-Netzwerkmonitor für WordPress. Mit Verbindungsübersicht zur Überwachung und Steuerung des Datenverkehrs im Blog.
+Network monitor for WordPress. With connection overview for controlling and regulating data traffic with your site.
 
-= Vertrauen ist gut, Kontrolle ist besser =
+= Trust, But Verify =
 
-*Snitch* - vom Englischen übersetzt *Petze*, *Spitzel*, *Plaudertasche* - überwacht und protokolliert den ausgehenden Datenstrom im WordPress-Blog. Jede Verbindung aus WordPress heraus wird aufgezeichnet und Administratoren in tabellarischer Form zur Verfügung gestellt.
+*Snitch* monitors and logs the outgoing data stream of your WordPress site. It records every outbound connection from WordPress and provides a log table for administrators.
 
-Verbindungsanfragen werden von *Snitch* nicht nur mitgeschrieben, auch können zukünftige Versuche blockiert werden: Wahlweise abhängig von der Ziel-URL (Internet-Adresse, die im Hintergrund aufgerufen wird) oder aber vom ausgeführten Skript (Datei, die die Verbindung angefordert hat). Blockierte Verbindungen hebt das WordPress-Plugin visuell hervor. Bereits gesperrte Einträge können per Klick freigegeben werden.
+*Snitch* does not only log connection requests, but enables you to block future requests either by target URL (internet address being called in the background), or by script (file being executed to open up a connection). Once blocked, a  connection will be visually highlighted. Blocked entries can be unblocked with a simple click.
 
-*Snitch* ist also perfektes Werkzeug fürs „Mithören“ der Kommunikation nach „Außen“. Auch geeignet für die Früherkennung von installierter Malware und Tracking-Software.
+*Snitch* is a perfect tool to “listen in” on outbound communication. It is also suitable to early recognize any malware and tracking software installed.
 
 
-= Zusammenfassung =
-*Snitch* führt ein Logbuch mit allen autorisierten und blockierten Konnektivitätsversuchen. Die Übersicht verschafft Transparenz und Kontrolle über ausgehende Verbindungen, die von Plugins, Themes und WordPress ausgelöst wurden. Weitere Details und Antworten auf Häufige Fragen im [Snitch Handbuch](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/).
+= Summary =
+*Snitch* writes a log of both authorized and blocked attempts of connectivity. An overall view provides transparency and lets you control outgoing connections initialized by plugins, themes, or WordPress. Further info and answers to frequently asked questions can be found in the [Snitch Handbook (German)](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/).
 
-= Pluspunkte =
-* Übersichtliche Oberfläche
-* Anzeige der Ziel-URL und Ursprungsdatei
-* Gruppierung, Sortierung und Durchsuchen
-* Optische Hervorhebung geblockter Anfragen
-* POST-Variablen per Klick anzeigbar
-* Blockieren/Freigabe der Verbindungen nach Domain/Datei
-* Überwachung der Kommunikation im Backend und Frontend
-* Löschung aller Einträge per Knopfdruck
-* Kosten- und werbefrei
+= In A Nutshell =
+* neat interface
+* displays target URL and source file
+* features grouping, sorting, searching
+* visual highlighting of blocked requests
+* show POST variables with a simple click
+* block/unblock connections by domain/file
+* monitors communication in back-end and front-end
+* delete all entries by pressing a button
+* free of charge, no advertising
 
 
 = Support =
-Fragen rund um das Plugin werden gern per E-Mail beantwortet. Beachtet auch die [Guidelines](https://plus.google.com/+SergejMüller/posts/Ex2vYGN8G2L).
+* Use the [support forums at WordPress.org](//wordpress.org/support/plugin/snitch/), or e-mail me. (Particularly before you write a review, please.)
+* Be precise, I’m a bad guesser.
+* Play fair. _If_ you experience any issue _with_ this plugin, it doesn’t necessarily mean that issue is actually caused _by_ the plugin. Let’s work together and find out.
+* Don’t expect priority support. I’ll do my best to answer your request within a reasonable time frame, but please be aware I am doing this voluntarily, and there are definitely more important things in my life. Like family.
 
 
-= Systemvoraussetzungen =
-* WordPress ab 3.8
+= System Requirements =
+* WordPress 3.8 and higher
 
 
-= Unterstützung =
-* Per [Flattr](https://flattr.com/t/1628977)
-* Per [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZAQUT9RLPW8QN)
+= Donations =
+* Via [Flattr](https://flattr.com/t/1628977)
+* Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZAQUT9RLPW8QN)
 
 
-= Handbuch =
-* [Snitch: Netzwerkmonitor für WordPress](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/)
+= Handbook =
+* [Snitch: Netzwerkmonitor für WordPress (German)](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/)
 
 
-= Autor =
+= Author =
 * [Twitter](https://twitter.com/wpSEO)
 * [Google+](https://plus.google.com/110569673423509816572)
 * [Plugins](http://wpcoder.de)
 
 
+= Translators =
+* English: [Caspar Hübinger](http://glueckpress.com)
+* Russian: [Sergej Müller](http://wpcoder.de)
 
 
 == Changelog ==
 
+= 1.1.2 =
+* feature: english translation for the readme file
+* feature: russian translation for plugin files
+* *time expenditure for this release (development & QA): 2.0 hours*
+
 = 1.1.1 =
-* Feature: Status-Code „-1“ bei fehlerhaften Verbindungen
-* *Release-Zeitaufwand (Development & QA): 2,5 Stunden*
+* feature: status code “-1” for failing connections
+* *time expenditure for this release (development & QA): 2.5 hours*
 
 = 1.1.0 =
-* Feature: Ausführungsdauer als Metrik (Danke [Matthias Kilian](https://www.gaertner.de) für die Idee)
+* feature: execution time as metric (thanks [Matthias Kilian](https://www.gaertner.de) for the idea)
 
 = 1.0.12 =
-* Weitgehende Berücksichtigung von Nutzerrollen
-* Textliche Anpassungen
+* extensive consideration of user roles
+* copy adjustments
 
 = 1.0.11 =
-* Unterstützung zu WordPress 3.9
-* Sourcecode-Schönheitskorrekturen
+* support for WordPress 3.9
+* source code face lifting
 
 = 1.0.10 =
-* Change: $pre als Rückgabewert in der Plugin-Funktion `inspect_request`
+* change: $pre as return value of function `inspect_request`
 
 = 1.0.9 =
-* Optimierung für WordPress 3.8
-* Einführung der Konstante `SNITCH_IGNORE_INTERNAL_REQUESTS`
-* [Mehr Details zum Update auf Google+](https://plus.google.com/+SergejMüller/posts/KaSGc9uNpk4)
+* optimization for WordPress 3.8
+* introduction of constant `SNITCH_IGNORE_INTERNAL_REQUESTS`
+* [details for this update on Google+](https://plus.google.com/+SergejMüller/posts/KaSGc9uNpk4)
 
 = 1.0.8 =
-* Ausgabe der POST-Daten per Klick
-* Support für WordPress 3.6
-* [Mehr Details zum Update auf G+](https://plus.google.com/110569673423509816572/posts/f8VaQaHfQjx)
+* output POST data on click
+* support for WordPress 3.6
+* [details for this update on Google+](https://plus.google.com/110569673423509816572/posts/f8VaQaHfQjx)
 
 = 1.0.7 =
-* Entfernung des überflüssigen "Neu"-Links in der Toolbar
-* Unterbindung direkter Dateiaufrufe
+* removal of obsolete "New" link from the toolbar
+* prevention of direct file calls
 
 = 1.0.6 =
-* Umbenennung/Umstellung der Funktion *delete_items* auf public
+* set function `delete_items` to public
 
 = 1.0.5 =
-* Aufbewahrung von maximal 200 Snitch-Einträgen
+* storage of a maximum of 200 Snitch entries
 
 = 1.0.4 =
-* Neu: Durchsuchen der Ziel-URLs möglich
+* new: searching of target URLs
 
 = 1.0.3 =
-* Neu: Schaltfläche *Protokoll leeren*
-* Entfernt: Verzicht auf den Papierkorb
+* new: button *Empty Protocol*
+* removed: avoidance of trash
 
 = 1.0.2 =
-* Umbenennung der Custom Field Keys zwecks Konfliktvermeidung
+* renaming of custom field keys to avoid conflict
 
 = 1.0.1 =
-* Fix für *Call to undefined function get_current_screen*
+* fix for *Call to undefined function get_current_screen*
 
 = 1.0.0 =
 * Snitch goes online
@@ -128,6 +139,6 @@ Fragen rund um das Plugin werden gern per E-Mail beantwortet. Beachtet auch die 
 
 == Screenshots ==
 
-1. Snitch Verbindungsliste mit Ziel-URL und Aktionen
+1. Snitch connection list with target URL and actions
 
-2. Snitch Verbindungsliste mit weiteren Informationen
+2. Snitch connection list with further information
