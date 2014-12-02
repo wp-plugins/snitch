@@ -49,6 +49,17 @@ Network monitor for WordPress. With connection overview for controlling and regu
 * Don’t expect priority support. I’ll do my best to answer your request within a reasonable time frame, but please be aware I am doing this voluntarily, and there are definitely more important things in my life. Like family.
 
 
+= Memory Usage =
+* Back-end: ~ 0,32 MB
+* Front-end: ~ 0,27 MB
+
+
+= Available Languages =
+* English
+* Deutsch
+* Русский
+
+
 = System Requirements =
 * WordPress 3.8 and higher
 
