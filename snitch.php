@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snitch
-Description: Network monitor for WordPress. Connecting overview for monitoring and controlling of outgoing site traffic.
+Description: Network monitor for WordPress. Connection overview for monitoring and controlling outgoing data traffic.
 Text Domain: snitch
 Domain Path: /lang
 Author: Sergej M&uuml;ller

@@ -10,13 +10,13 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
 
-Network monitor for WordPress. Connecting overview for monitoring and controlling of outgoing site traffic.
+Network monitor for WordPress. Connection overview for monitoring and controlling outgoing data traffic.
 
 
 
 == Description ==
 
-Network monitor for WordPress. With connection overview for controlling and regulating data traffic with your site.
+Network monitor for WordPress with connection overview for controlling and regulating data traffic from your site.
 
 = Trust, But Verify =
 
@@ -89,11 +89,11 @@ Network monitor for WordPress. With connection overview for controlling and regu
 = 1.1.2 =
 * feature: english translation for the readme file
 * feature: russian translation for plugin files
-* *time expenditure for this release (development & QA): 2.0 hours*
+* *time investment for this release (development & QA): 2.0 hours*
 
 = 1.1.1 =
 * feature: status code “-1” for failing connections
-* *time expenditure for this release (development & QA): 2.5 hours*
+* *time investment for this release (development & QA): 2.5 hours*
 
 = 1.1.0 =
 * feature: execution time as metric (thanks [Matthias Kilian](https://www.gaertner.de) for the idea)

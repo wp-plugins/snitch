@@ -81,7 +81,7 @@ msgstr "Опустошить протокол"
 msgid "Search in destination"
 msgstr "Искать в URL направлениях"
 
-msgid "Network monitor for WordPress. Connecting overview for monitoring and controlling of outgoing site traffic."
+msgid "Network monitor for WordPress. Connection overview for monitoring and controlling outgoing data traffic."
 msgstr "Сетевой монитор (стукач) для WordPress. С обзором подключений и контролем трафика на блоге."
 
 msgid "Outgoing connections are blocked in <code>wp-config.php</code>. Check the constant WP_HTTP_BLOCK_EXTERNAL."
