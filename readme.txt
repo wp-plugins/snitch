@@ -86,6 +86,9 @@ Network monitor for WordPress with connection overview for controlling and regul
 
 == Changelog ==
 
+= 1.1.3 =
+* support for WordPress 4.1
+
 = 1.1.2 =
 * feature: english translation for the readme file
 * feature: russian translation for plugin files

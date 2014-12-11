@@ -41,7 +41,7 @@ class Snitch_CPT
 	* Registrierung der Post Types und Aktionen
 	*
 	* @since   0.0.1
-	* @change  1.1.2
+	* @change  1.1.3
 	*/
 
 	public function __construct()
@@ -64,7 +64,8 @@ class Snitch_CPT
 				'query_var' => true,
 				'hierarchical' => false,
 				'capabilities' => array(
-					'create_posts' => false
+					'create_posts' => false,
+					'delete_posts' => false
 				),
 				'menu_position' => 50,
 				'capability_type' => 'snitch',
