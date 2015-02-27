@@ -6,7 +6,7 @@ Text Domain: snitch
 Domain Path: /lang
 Author: Sergej M&uuml;ller
 Author URI: http://wpcoder.de
-Plugin URI: http://wordpress.org/extend/plugins/snitch/
+Plugin URI: https://wordpress.org/extend/plugins/snitch/
 License: GPLv2 or later
 Version: 1.1.3
 */
