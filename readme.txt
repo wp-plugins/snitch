@@ -62,6 +62,7 @@ Network monitor for WordPress with connection overview for controlling and regul
 
 = System Requirements =
 * WordPress 3.8 and higher
+* PHP 5.2.4 and newer
 
 
 = Donations =
