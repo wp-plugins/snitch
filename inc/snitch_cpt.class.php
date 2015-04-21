@@ -427,7 +427,7 @@ class Snitch_CPT
 				'code'     => esc_html__('Code', 'snitch'),
 				'duration' => esc_html__('Duration', 'snitch'),
 				'created'  => esc_html__('Time', 'snitch'),
-				'postdata' => esc_html__('POST data', 'snitch')
+				'postdata' => esc_html__('Data', 'snitch')
 			)
 		);
 	}
@@ -736,17 +736,15 @@ class Snitch_CPT
 			'<a href="%s" class="%s">%s</a>',
 			esc_url(
 				wp_nonce_url(
-					admin_url(
-						add_query_arg(
-							array(
-								'id'	    => $post_id,
-								'paged'		=> self::_get_pagenum(),
-								'type'		=> $type,
-								'action'    => $action,
-								'post_type' => 'snitch'
-							),
-							'edit.php'
-						)
+					add_query_arg(
+						array(
+							'id'	    => $post_id,
+							'paged'		=> self::_get_pagenum(),
+							'type'		=> $type,
+							'action'    => $action,
+							'post_type' => 'snitch'
+						),
+						admin_url('edit.php')
 					),
 					'snitch'
 				)
@@ -836,7 +834,7 @@ class Snitch_CPT
 					array(
 						'post_type' => 'snitch'
 					),
-					'edit.php'
+					admin_url('edit.php')
 				)
 			);
 
@@ -901,7 +899,7 @@ class Snitch_CPT
 					'updated'   => count($ids) * ( $action === 'unblock' ? -1 : 1 ),
 					'paged'     => self::_get_pagenum()
 				),
-				'edit.php'
+				admin_url('edit.php')
 			)
 		);
 

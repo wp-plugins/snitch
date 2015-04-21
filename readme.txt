@@ -3,7 +3,7 @@ Contributors: sergej.mueller
 Tags: sniffer, snitch, network, monitoring, firewall
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZAQUT9RLPW8QN
 Requires at least: 3.8
-Tested up to: 4.1.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -74,21 +74,25 @@ Network monitor for WordPress with connection overview for controlling and regul
 * [Snitch: Netzwerkmonitor für WordPress (German)](http://playground.ebiene.de/snitch-wordpress-netzwerkmonitor/)
 
 
+= Translators =
+* English: [Caspar Hübinger](http://glueckpress.com)
+* Russian: [Sergej Müller](http://wpcoder.de)
+
+
 = Author =
 * [Twitter](https://twitter.com/wpSEO)
 * [Google+](https://plus.google.com/110569673423509816572)
 * [Plugins](http://wpcoder.de)
 
 
-= Translators =
-* English: [Caspar Hübinger](http://glueckpress.com)
-* Russian: [Sergej Müller](http://wpcoder.de)
-
-
 == Changelog ==
 
+= 1.1.4 =
+* Support for WordPress 4.2
+* Nice to have: `admin_url()` for `edit.php` requests
+
 = 1.1.3 =
-* support for WordPress 4.1
+* Support for WordPress 4.1
 
 = 1.1.2 =
 * feature: english translation for the readme file
