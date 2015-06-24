@@ -1,5 +1,5 @@
 === Snitch ===
-Contributors: sergej.mueller
+Contributors: pluginkollektiv
 Tags: sniffer, snitch, network, monitoring, firewall
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZAQUT9RLPW8QN
 Requires at least: 3.8
